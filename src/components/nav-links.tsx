@@ -17,8 +17,8 @@ export default function Menus() {
       name: 'Dev'
     },
     {
-      href: '/diary',
-      about: 'diary',
+      href: '/logs',
+      about: 'logs',
       name: 'Logs'
     }
   ]

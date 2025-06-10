@@ -6,7 +6,9 @@ export default function Header() {
     <header>
       <div className="row">
         <div className="row wing">
-          <Icon name="profile" width={36} height={36} />
+          <Link href={"/login"} about="login">
+            <Icon name="profile" width={36} height={36} />
+          </Link>
         </div>
         <div className="col title">
           <Link href={"/"} about="home" >

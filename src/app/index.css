@@ -130,7 +130,9 @@ footer {
 
 button {
   border: none;
-  background-color: var(--button-primary);
+  background-color: var(--background-primary);
+  border-radius: 0.5rem;
+  cursor: pointer;
 }
 
 button > * {
