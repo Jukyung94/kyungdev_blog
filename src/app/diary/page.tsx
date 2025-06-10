@@ -1,5 +1,5 @@
 export default function Page() {
   return(
-    <div>diary</div>
+    <div className="page">diary</div>
   )
 };

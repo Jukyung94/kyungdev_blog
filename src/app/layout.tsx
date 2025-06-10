@@ -29,10 +29,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <div className="page layout col border_blue">
-          <Header />
-          <Menus />
-          <hr />
+        <div className="page gap col">
+          <div>
+            <Header />
+            <Menus />
+            <hr />
+          </div>
           {children}
           <Footer />
         </div>

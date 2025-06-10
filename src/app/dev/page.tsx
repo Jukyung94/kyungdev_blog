@@ -1,5 +1,9 @@
 export default function Page() {
   return (
-    <div>dev page</div>
+    <div className="page">
+      <div className="container col">
+          dev page
+      </div>
+    </div>
   )
 }
