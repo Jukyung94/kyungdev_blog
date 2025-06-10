@@ -2,8 +2,8 @@
 import { FormEvent, useState, useTransition } from "react"
 
 export default function Page() {
-  const [name, setName] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+  // const [name, setName] = useState<string>("");
+  // const [password, setPassword] = useState<string>("");
   const [isPending, startTransition] = useTransition();
   
   function login( formdata: FormEvent<HTMLFormElement> ) {
