@@ -10,7 +10,7 @@
   --button-primary-hover: #383838;
   --button-secondary-hover: #f2f2f2;
 
-  --padding-sm: 0.25rem;
+  --padding-xs: 0.25rem;
   --padding-s: 0.5rem;
   --padding-m: 1rem;
   --padding-l: 1.5rem;
@@ -101,7 +101,7 @@ header .title {
 header .wing {
   position: absolute;
   right: var(--padding-m);
-  top: var(--padding-sm);
+  top: var(--padding-xs);
   justify-self: flex-end;
 }
 
@@ -155,11 +155,18 @@ button.inactive{
   color: var(--font-secondary)
 }
 
+
+input {
+  border: 1px solid var(--background-secondary);
+  border-radius: 0.5rem;
+  padding: var(--padding-s)
+}
+
 @media only screen and (max-width: 600)  {
   .nav {
     flex-direction: column;
     align-items: center;
-    gap: var(--padding-sm)
+    gap: var(--padding-xs)
   }
 
   header {
@@ -185,6 +192,18 @@ button.inactive{
     padding: 0;
   }
 }
+
+/* @media(prefers-color-scheme: dark) {
+  header, .nav {
+    background-color: var(--background-primary);
+    color: black;
+  }
+  .page,
+  .content {
+    background-color: var(--background-secondary);
+    color: black;
+  }
+} */
 
 .border_red {
   border: 10px solid red;

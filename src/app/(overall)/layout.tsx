@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import "../globals.css";
+import "../index.css";
+import Menus from "@/components/nav-links";
+import Footer from "@/components/footer";
+import Header from "@/components/header";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,10 +27,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+        <div className="page gap col">
+          <div>
+            <Header />
+            <Menus />
+            <hr />
+          </div>
           {children}
-      </body> 
-    </html>
+          <Footer />
+        </div>
   );
 }

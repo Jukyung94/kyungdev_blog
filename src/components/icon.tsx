@@ -12,7 +12,8 @@ export function Icons({ name, width = 24, height = 24 }: IconType) {
     instagram: "mdi:instagram",
     twitter: "",
     email: "",
-    share: "mdi:share-variant-outline"
+    share: "mdi:share-variant-outline",
+    back: "mdi:arrow-back"
   }
 
   if (map[name]) {
