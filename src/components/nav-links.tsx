@@ -1,16 +1,9 @@
 'use client'
 import Link from "next/link"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 
 export default function Menus() {
   const [isActive, setIsActive] = useState('home');
-
-  // useEffect(() => {
-  //   const current = window.location.pathname.split('/');
-  //   console.log(current)
-  //   setIsActive(current[1])
-
-  // })
 
   const menus = [
     {
