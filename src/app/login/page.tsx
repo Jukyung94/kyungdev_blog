@@ -18,7 +18,7 @@ export default function Page() {
     <div className="login col">
       <div className="box">
         <h1>Login</h1>
-        <form onSubmit={login} className="content col form">
+        <form onSubmit={login} className="col form">
           <input type="text" placeholder="name" name="name" />
           <input type="password" placeholder="password" name="password" />
           <button type="submit" aria-disabled={isPending}>

@@ -59,7 +59,10 @@
 .content > p {
   word-break: normal;
   overflow-wrap: anywhere;
+}
 
+.list:hover {
+  background-color: var(--background-primary);
 }
 
 .col {
