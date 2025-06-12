@@ -1,5 +1,5 @@
 import { Icon } from "@iconify/react";
-import { IconType } from "@/app/lib/definitions";
+import { IconType } from "@/lib/definitions";
 
 
 export function Icons({ name, width = 24, height = 24 }: IconType) {
