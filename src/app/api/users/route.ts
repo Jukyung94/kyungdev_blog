@@ -13,7 +13,7 @@ async function getUsers() {
 
 
 
-export async function GET(request: Request) {
+export async function GET() {
   await getUsers()
   return new Response("", {
     status: 200,

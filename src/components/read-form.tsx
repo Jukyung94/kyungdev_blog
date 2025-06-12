@@ -6,17 +6,17 @@ import '@/form.css';
 import { useEffect, useState } from 'react';
 import { getDocumentById } from '@/lib/actions';
 import { usePathname } from 'next/navigation';
-import { DocumentData } from 'firebase/firestore';
+import { DocumentType } from '@/lib/definitions';
 
 export default function ReadForm() {
   const [comment, setComment] = useState<string>("");
-  const [item, setItem] = useState<DocumentData | undefined>();
+  const [item, setItem] = useState<DocumentType>();
 
   const path = usePathname();
   const id = path.split('/')[path.split('/').length - 1];
   
   async function getDocument() {
-    const doc = await getDocumentById(id);
+    const doc: DocumentType | undefined = await getDocumentById(id);
     setItem(doc)
   }
 
@@ -43,7 +43,7 @@ export default function ReadForm() {
             <hr />
             <div className="col">
               <span>댓글</span>
-              <input name="comment" id="" placeholder="댓글내용" value="" onChange={(event) => {
+              <input name="comment" id="" placeholder="댓글내용" value={comment} onChange={(event) => {
                 setComment(event.target.value)
               }} />
               <button>등록</button>
