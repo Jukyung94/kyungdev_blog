@@ -1,5 +1,7 @@
+import ReadForm from "@/components/read-form";
+
 export default function Page() {
   return (
-    <div>내용</div>
+    <ReadForm />
   )
 }

@@ -1,50 +1,8 @@
 import Link from "next/link";
+import { fetchDocuments } from "@/lib/data";
 
-export default function Home() {
-  const articles = [
-    {
-      no: '1',
-      title: '1번',
-      date: '2025-06-23',
-      author: 'Jukyung',
-      content: '동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이',
-      path: `/logs`
-    },
-    {
-      no: '2',
-      title: '2번',
-      date: '2025-06-23',
-      author: 'Jukyung',
-      content: '2',
-      path: `/dev`
-    },
-    {
-      no: '3',
-      title: '3번',
-      date: '2025-06-23',
-      author: 'Jukyung',
-      content: '3',
-      path: `/logs`
-    },
-    {
-      no: '4',
-      title: '4번',
-      date: '2025-06-23',
-      author: 'Jukyung',
-      content: '4',
-      path: `/dev`
-    },
-    {
-      no: '5',
-      title: '5번',
-      date: '2025-06-23',
-      author: 'Jukyung',
-      content: '5',
-      path: `/dev`
-    }
-
-  ]
-
+export default async function Home() {
+  const articles = await fetchDocuments();
 
   return (
     <div className="page">

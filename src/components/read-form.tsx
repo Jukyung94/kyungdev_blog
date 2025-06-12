@@ -1,38 +1,81 @@
-import '@/app/globals.css';
-import '@/app/index.css';
-import '@/app/form.css';
+'use client';
+
+import '@/globals.css';
+import '@/index.css';
+import '@/form.css';
+import { useEffect, useState } from 'react';
+import { getDocumentById } from '@/lib/actions';
+import { usePathname } from 'next/navigation';
+import { DocumentData } from 'firebase/firestore';
 
 export default function ReadForm() {
-  const item =  {
-      no: '1',
-      title: '1번',
-      date: '2025-06-23',
-      author: 'Jukyung',
-      content: '동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이동해물과백두산이',
-      path: `/logs`
-    }
+  const [comment, setComment] = useState<string>("");
+  const [item, setItem] = useState<DocumentData | undefined>();
 
-  return (
-    <div className="page">
-      <div className="container col gap">
-        <div className="content col">
-          <div className="col">
-            <h2>{item.title}</h2>
-            <div className="row">
-              <span>{item.date}</span>
-              <span>{item.author}</span>
+  const path = usePathname();
+  const id = path.split('/')[path.split('/').length - 1];
+  
+  async function getDocument() {
+    const doc = await getDocumentById(id);
+    setItem(doc)
+  }
+
+  useEffect(() => {
+    getDocument();
+  })
+
+  if(item) {
+    return (
+      <div className="page">
+        <div className="container col gap">
+          <div className="content col">
+            <div className="col">
+              <h2>{item.title}</h2>
+              <div className="row">
+                <span>{item.date}</span>
+                <span>{item.author}</span>
+              </div>
             </div>
-          </div>
-          <hr />
-          <div>
-            <span>{item.content}</span>
-          </div>
-          <hr />
-          <div>
-            댓글
+            <hr />
+            <div>
+              <span>{item.content}</span>
+            </div>
+            <hr />
+            <div className="col">
+              <span>댓글</span>
+              <input name="comment" id="" placeholder="댓글내용" value="" onChange={(event) => {
+                setComment(event.target.value)
+              }} />
+              <button>등록</button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  )
+    )
+  } else {
+    return (
+      <div className="page">
+        <div className="container col gap">
+          <div className="content col">
+            <div className="col">
+              <div className="row">
+              </div>
+            </div>
+            <hr />
+            <div>
+            </div>
+            <hr />
+            <div className="col">
+              <span>댓글</span>
+              <input name="comment" id="" placeholder="댓글내용" value="" onChange={(event) => {
+                setComment(event.target.value)
+              }} />
+              <button>등록</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
 }
