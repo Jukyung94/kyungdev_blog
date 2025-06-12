@@ -10,6 +10,14 @@ export async function getDocumentById(id: string) {
     const document = docSnap.data() as DocumentType
     return document;
   } else {
-    console.log("===============================")
+    const document: DocumentType = {
+      title: "No Data",
+      date: "",
+      author: "anonymous",
+      content: "No data",
+      path: "/no",
+      no: 0
+    }
+    return document;
   }
 }

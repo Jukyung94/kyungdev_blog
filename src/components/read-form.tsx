@@ -16,13 +16,13 @@ export default function ReadForm() {
   const id = path.split('/')[path.split('/').length - 1];
   
   async function getDocument() {
-    const doc: DocumentType | undefined = await getDocumentById(id);
+    const doc: DocumentType = await getDocumentById(id);
     setItem(doc)
   }
 
   useEffect(() => {
     getDocument();
-  })
+  },  [])
 
   if(item) {
     return (
