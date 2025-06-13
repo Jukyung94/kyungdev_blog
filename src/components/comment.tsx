@@ -1,11 +1,22 @@
 'use client';
 
 import { CommentType } from "@/lib/definitions";
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 export default function Comment(props: { id: number }) {
   const [comment, setComment] = useState<CommentType>({ author: "", password: "", content: ""});
   const [prevComments, setPrevComments] = useState<CommentType[]>();
+
+  console.log(props.id);
+
+  useEffect(() => {
+    setPrevComments([
+      { author: "", password: "", content: ""},
+      { author: "", password: "", content: ""},
+      { author: "", password: "", content: ""}
+    ])
+  }, [])
+
   return(
       <div className="col">
         {prevComments?.map(() => (
