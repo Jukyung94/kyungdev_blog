@@ -27,7 +27,7 @@ export default function Comment(props: { id: number }) {
           <div>
             <label htmlFor="author">name</label>
             <input type="text" name="author" onChange={(event) => {
-  
+              setComment({...comment, author: event.target.value})
             }}/>
           </div>
         </div>
