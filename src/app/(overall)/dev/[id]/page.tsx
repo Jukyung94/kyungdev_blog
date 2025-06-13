@@ -1,7 +1,7 @@
-import ReadForm from "@/components/read-form";
+// import ReadForm from "@/components/read-form";
 
-export default function Page() {
-  return (
-    <ReadForm />
-  )
-}
+// export default function Page() {
+//   return (
+//     <ReadForm />
+//   )
+// }

@@ -17,3 +17,14 @@ export type DocumentType = {
   path: string;
   no: number;
 }
+
+export type CommentType = {
+  author: string;
+  password?: string;
+  content: string;
+}
+
+export type msgState = {
+  code: "success" | "fail" | "",
+  message: string
+}

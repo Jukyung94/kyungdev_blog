@@ -1,0 +1,44 @@
+form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+  gap: var(--content-gap);
+}
+
+form > select {
+  padding: var(--padding-s);
+  width: auto;
+}
+
+form input {
+  border: none;
+  width: 100%;
+  outline: none;
+}
+
+form .title {
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+
+form .title input {
+  border-bottom: 1px solid var(--background-secondary);
+  border-radius: 0;
+}
+
+form textarea {
+  border: 1px solid var(--background-secondary);
+  width: 100%;
+  height: 500px;
+  outline: none;
+  padding: var(--padding-s)
+}
+
+form button {
+  align-self: flex-end;
+  padding: var(--padding-s) var(--padding-m);
+  font-weight: bold;
+}
+

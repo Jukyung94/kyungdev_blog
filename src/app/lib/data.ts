@@ -1,4 +1,4 @@
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import { db } from "../../../firebase.config";
 
 const users = collection(db, "users");
@@ -12,7 +12,7 @@ export async function fetchUsers() {
 }
 
 export async function fetchDocuments() {
-  const data = await getDocs(documents);
+  const data = await getDocs(query(documents, orderBy("no", "desc")));
   const documentsArr = data.docs.map(item => {
     return item.data()
   })
