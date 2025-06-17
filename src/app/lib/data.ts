@@ -1,6 +1,7 @@
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import { db } from "../../../firebase.config";
 
+export const dynamic = 'force-dynamic'
 const users = collection(db, "users");
 const documents = collection(db, "documents");
 

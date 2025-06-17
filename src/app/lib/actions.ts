@@ -63,7 +63,6 @@ export async function createForm(state: msgState, form: FormData) {
       message: "Fail to create an article"
     } as msgState;
   }
-  revalidatePath('/');
   redirect('/');
 };
 

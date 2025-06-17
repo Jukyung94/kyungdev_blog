@@ -6,8 +6,6 @@ export default async function Home() {
 
   return (
     <div className="page">
-      <p>{new Date().toISOString()}</p>
-      {articles.length}
       <div className="container col gap">
         {articles.map(item => (
           <div key={item.no}>
