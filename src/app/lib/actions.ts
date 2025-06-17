@@ -1,3 +1,5 @@
+'use server';
+
 import { doc, getDoc, setDoc, getDocs, collection, query, orderBy, limit } from "firebase/firestore";
 import { db } from "../../../firebase.config";
 import { DocumentType, msgState } from "./definitions";
