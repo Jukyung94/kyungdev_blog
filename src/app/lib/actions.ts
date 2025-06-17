@@ -4,7 +4,7 @@ import { doc, getDoc, setDoc, getDocs, collection, query, orderBy, limit } from 
 import { db } from "../../../firebase.config";
 import { DocumentType, msgState } from "./definitions";
 import { redirect } from "next/navigation";
-import { revalidatePath } from "next/cache";
+// import { revalidatePath } from "next/cache";
 
 const documents = collection(db, "documents");
 
