@@ -3,30 +3,30 @@ import '@/index.css';
 import '@/form.css';
 import { DocumentType } from '@/lib/definitions';
 import Comment from './comment';
+import { getDocumentById } from '@/lib/actions';
 
-export default function ReadForm(props: DocumentType) {
+export default async function ReadForm(props: { id: string }) {
+  const doc: DocumentType = await getDocumentById(props.id)
 
   return (
-    <div className="page">
       <div className="container col gap">
         <div className="content col">
           <div className="col">
-            <h2>{props.title}</h2>
+            <h2>{doc.title}</h2>
             <div className="row">
-              <span>{props.date}</span>
-              <span>{props.author}</span>
+              <span>{doc.date}</span>
+              <span>{doc.author}</span>
             </div>
           </div>
           <hr />
           <div>
-            <span>{props.content}</span>
+            <span>{doc.content}</span>
           </div>
           <hr />
           <div className="col">
-            <Comment id={props.no} />
+            <Comment id={props.id} />
           </div>
         </div>
-      </div>
     </div>
   )
 }

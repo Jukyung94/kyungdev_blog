@@ -1,7 +1,9 @@
+import ReadForm from "@/components/read-form";
 
-export default function Page() {
+export default async function Page(props: any) {
+  const params = await props.params;
+  const id = params.id;
   return (
-    <div>sample</div>
-    // <ReadForm />
+    <ReadForm id={id}  />
   )
 }

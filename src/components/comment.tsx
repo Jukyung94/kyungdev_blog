@@ -3,7 +3,7 @@
 import { CommentType } from "@/lib/definitions";
 import { useEffect, useState } from "react"
 
-export default function Comment(props: { id: number }) {
+export default function Comment(props: { id: string }) {
   const [comment, setComment] = useState<CommentType>({ author: "", password: "", content: ""});
   const [prevComments, setPrevComments] = useState<CommentType[]>();
 
@@ -11,16 +11,19 @@ export default function Comment(props: { id: number }) {
 
   useEffect(() => {
     setPrevComments([
-      { author: "", password: "", content: ""},
-      { author: "", password: "", content: ""},
-      { author: "", password: "", content: ""}
+      { author: "test", password: "", content: "1"},
+      { author: "test", password: "", content: "2"},
+      { author: "test", password: "", content: "3"}
     ])
   }, [])
 
   return(
       <div className="col">
-        {prevComments?.map(() => (
-          <></>
+        {prevComments?.map((item, idx) => (
+          <div key={idx}>
+            <div>{item.author}</div>
+            <div>{item.content}</div>
+          </div>
         ))}
         <span>댓글</span>
         <div>

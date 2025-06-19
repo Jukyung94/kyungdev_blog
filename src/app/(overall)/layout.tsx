@@ -16,15 +16,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <main className="page gap col">
+    <div className="page gap col">
       <div>
         <Header />
         <Menus />
       </div>
-      <div>
+      <div id="content">
         {children}
       </div>
-      <Footer />
-    </main>
+        <Footer />
+    </div>
   );
 }

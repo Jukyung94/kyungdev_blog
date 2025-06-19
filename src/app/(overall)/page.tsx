@@ -5,23 +5,21 @@ export default async function Home() {
   const articles = await fetchDocuments();
 
   return (
-    <div className="page">
-      <div className="container col gap">
-        {articles.map(item => (
-          <div key={item.no}>
-            <Link href={`${item.path}/${item.no}`}>
-              <div className="content col list">
-                <div className="col">
-                  <h2>{item.title}</h2>
-                  <p>{item.date}</p>
-                </div>
-                {<p>{item.content.length > 100 ? item.content.slice(0, 100) + '...' : item.content}</p>}
+    <div className="container col gap">
+      {articles.map(item => (
+        <div key={item.no}>
+          <Link href={{ pathname: `${item.path}/${item.no}`, query: item}} as={`${item.path}/${item.no}`}>
+            <div className="content col list">
+              <div className="col">
+                <h2>{item.title}</h2>
+                <p>{item.date}</p>
               </div>
-            </Link>
-          </div>
-        ))}
+              {<p>{item.content.length > 100 ? item.content.slice(0, 100) + '...' : item.content}</p>}
+            </div>
+          </Link>
+        </div>
+      ))}
 
-      </div>
     </div>
   );
 }
