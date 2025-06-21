@@ -23,6 +23,16 @@ export default async function ReadForm(props: { id: string }) {
             <span>{doc.content}</span>
           </div>
           <hr />
+            <div className='row'>
+              <div className='wing'>
+                <button>
+                  <span>EDIT</span>
+                </button>
+                <button>
+                  <span>DELETE</span>
+                </button>
+              </div>
+            </div>
           <div className="col">
             <Comment id={props.id} />
           </div>

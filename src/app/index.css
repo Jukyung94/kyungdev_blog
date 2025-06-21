@@ -192,7 +192,7 @@ input {
     flex-direction: column;
   }
 
-  header .wing {
+  .wing {
     position: relative;
     align-self: flex-end;
     right: 0;
