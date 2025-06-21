@@ -114,6 +114,13 @@ header .wing {
   justify-self: flex-end;
 }
 
+.wing {
+  position: relative;
+  justify-self: flex-end;
+  align-self: flex-end;
+}
+
+
 hr {
   border: 2px solid var(--background-primary);
 }
@@ -192,7 +199,7 @@ input {
     flex-direction: column;
   }
 
-  .wing {
+  header .wing {
     position: relative;
     align-self: flex-end;
     right: 0;

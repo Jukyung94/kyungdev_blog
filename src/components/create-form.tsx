@@ -26,7 +26,7 @@ export default function Form() {
               <textarea name="content" id="content" placeholder="Content..." />
             </div>
             <button type="submit" disabled={isPending}>
-              SUBMIT
+              <span>SUBMIT</span>
             </button>
             {state?.code === "fail" && (
               <div>{state.message}</div>
