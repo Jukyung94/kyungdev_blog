@@ -1,12 +1,13 @@
 'use server';
 
-import { doc, getDoc, setDoc, getDocs, collection, query, orderBy, limit } from "firebase/firestore";
+import { doc, getDoc, setDoc, getDocs, collection, query, orderBy, limit, where, deleteDoc } from "firebase/firestore";
 import { db } from "../../../firebase.config";
 import { DocumentType, msgState } from "./definitions";
 import { redirect } from "next/navigation";
-// import { revalidatePath } from "next/cache";
+import { cookies } from "next/headers";
 
 const documents = collection(db, "documents");
+const users = collection(db, "users");
 
 export async function createForm(state: msgState, form: FormData) {
   const path = form.get("path");
@@ -83,5 +84,60 @@ export async function getDocumentById(id: string) {
       no: 0
     }
     return document;
+  };
+};
+
+export async function deleteDocumentById(id: string) {
+  try  {
+    const docRef = doc(db, "documents", id);
+    const docSnap = await getDoc(docRef);
+    console.log(docSnap.data())
+    if(!docSnap.data()) throw new Error("delete failed");
+
+    await deleteDoc(docRef);
+
+    return {
+      code: "success",
+      message: "delete completed"
+    } as msgState
+  } catch (error) {
+    const err = error as msgState
+    return err
   }
+}
+
+export async function logIn(state: msgState, form: FormData) {
+  try {
+    const username = form.get("username");
+    const password = form.get("password");
+
+    if(!username || !password)  throw new Error('invalid username or password');
+
+    const data = await getDocs(query(users, where("username", "==", username)));
+
+    if(data.docs.length === 0) throw new Error('user not exist');
+
+    const userArr = data.docs.map(item => item.data());
+
+    const user = userArr[0];
+    if(password !== user.password) throw new Error('invalid password');
+    
+    const cookie = await cookies();
+    cookie.set("user", `${username}`);
+
+  } catch (error) {
+    const err = error as msgState;
+    return {
+      code: "fail",
+      message: err.message
+    } as msgState;
+  }
+
+  redirect('/');
+};
+
+export async function logOut() {
+  const cookie = await cookies();
+  cookie.delete("user");
+  redirect('/')
 }
