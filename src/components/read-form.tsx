@@ -2,10 +2,13 @@ import '@/globals.css';
 import '@/index.css';
 import { DocumentType } from '@/lib/definitions';
 import Comment from './comment';
-import { getDocumentById } from '@/lib/actions';
+import { deleteDocumentById, getDocumentById } from '@/lib/actions';
+import { userName } from '@/lib/data';
+import { Delete } from './formActions';
 
 export default async function ReadForm(props: { id: string }) {
-  const doc: DocumentType = await getDocumentById(props.id)
+  const doc: DocumentType = await getDocumentById(props.id);
+  const user = await userName();
 
   return (
       <div className="container col gap">
@@ -18,18 +21,26 @@ export default async function ReadForm(props: { id: string }) {
             </div>
           </div>
           <hr />
-          <div>
+          <div id='content'>
             <span>{doc.content}</span>
           </div>
           <hr />
-          <div className='row wing'>
-            <button>
-              <span>EDIT</span>
-            </button>
-            <button>
-              <span>DELETE</span>
-            </button>
-          </div>
+          {user && (
+            <div className='row wing'>
+              <button>
+                <span>EDIT</span>
+              </button>
+              <Delete id={props.id} />
+              {/* <button onClick={async () => {
+                "user client"
+                if(confirm('delete article?')) {
+                  await deleteDocumentById(props.id);
+                }
+              }}>
+                <span>DELETE</span>
+              </button> */}
+            </div>
+          )}
           <div className="col">
             <Comment id={props.id} />
           </div>

@@ -5,6 +5,7 @@ import '@/form.css';
 import { useActionState } from 'react';
 import { createForm } from '@/lib/actions';
 import { msgState } from '@/lib/definitions';
+import Error from './error';
 
 export default function Form() {
   const initialState: msgState = { code: "", message: ""}
@@ -29,7 +30,7 @@ export default function Form() {
               <span>SUBMIT</span>
             </button>
             {state?.code === "fail" && (
-              <div>{state.message}</div>
+              <Error message={state.message} />
             )}
           </form>
           {isPending && "등록중"}

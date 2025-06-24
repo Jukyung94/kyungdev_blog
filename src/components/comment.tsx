@@ -19,13 +19,13 @@ export default function Comment(props: { id: string }) {
 
   return(
       <div className="col">
+        <span>댓글</span>
         {prevComments?.map((item, idx) => (
           <div key={idx}>
             <div>{item.author}</div>
             <div>{item.content}</div>
           </div>
         ))}
-        <span>댓글</span>
         <div>
           <div>
             <label htmlFor="author">name</label>
