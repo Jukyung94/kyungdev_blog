@@ -2,7 +2,7 @@ import '@/globals.css';
 import '@/index.css';
 import { DocumentType } from '@/lib/definitions';
 import Comment from './comment';
-import { deleteDocumentById, getDocumentById } from '@/lib/actions';
+import { getDocumentById } from '@/lib/actions';
 import { userName } from '@/lib/data';
 import { Delete } from './formActions';
 
@@ -31,14 +31,6 @@ export default async function ReadForm(props: { id: string }) {
                 <span>EDIT</span>
               </button>
               <Delete id={props.id} />
-              {/* <button onClick={async () => {
-                "user client"
-                if(confirm('delete article?')) {
-                  await deleteDocumentById(props.id);
-                }
-              }}>
-                <span>DELETE</span>
-              </button> */}
             </div>
           )}
           <div className="col">
