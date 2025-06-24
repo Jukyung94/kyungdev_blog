@@ -20,10 +20,14 @@
 
   --font-main: #111111;
   --font-secondary: #888888;
+  --font-m: 1rem;
+  --font-s: 0.75rem;
 
   --page-gap: 2rem;
   --container-gap: 1.5rem;
   --content-gap: 1rem;
+
+  --color-error: rgb(239 68 68);
 }
 
 .page {
@@ -36,7 +40,7 @@
   gap: var(--page-gap);
 }
 
-.page > div[id="content"]{
+div[id="content"] {
   flex: 1
 }
 
@@ -54,7 +58,7 @@
 .content {
   display: flex;
   gap: var(--padding-m);
-  height: auto;
+  height: 100%;
 }
 
 .content > div {
@@ -79,6 +83,10 @@
 .row {
   display: flex;
   flex-direction: row;
+}
+
+.row.middle {
+  align-items: center;
 }
 
 header {
@@ -144,6 +152,12 @@ footer {
   background: none;
 }
 
+.error {
+  color: var(--color-error);
+  font-size: var(--font-s);
+  gap: var(--padding-xs)
+}
+
 
 button {
   border: none;
@@ -157,6 +171,10 @@ button > * {
   padding: var(--padding-s) var(--padding-m);
   font-size: 1rem;
   font-weight: bolder;
+}
+
+button > *[id="icon"] {
+  padding: 0 !important;
 }
 
 button:hover {
