@@ -3,8 +3,6 @@
 import { deleteDocumentById } from "@/lib/actions";
 import { redirect } from "next/navigation";
 
-deleteDocumentById
-
 export function Delete(props: {id : string}) {
   const { id } = props;
   return(
