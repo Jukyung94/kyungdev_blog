@@ -13,10 +13,13 @@ export function Icons({ name, width = 24, height = 24 }: IconType) {
     twitter: "",
     email: "",
     share: "mdi:share-variant-outline",
-    back: "mdi:arrow-back"
+    back: "mdi:arrow-back",
+    error: "mdi:alert-circle-outline",
+    login: "mdi:login",
+    logout: "mdi:logout"
   }
 
   if (map[name]) {
-    return <Icon icon={map[name]} width={width} height={height} />
+    return <Icon id="icon" icon={map[name]} width={width} height={height} />
   }
 }

@@ -1,14 +1,24 @@
 import Link from "next/link"
 import { Icons as Icon } from "./icon"
+import { logOut } from "@/lib/actions";
+import { userName } from "@/lib/data";
 
-export default function Header() {
+export default async function Header() {
+  const user = await userName();
+
   return(
     <header>
       <div className="row">
         <div className="row wing">
+        {user === "Jukyung" ? 
+          <button onClick={logOut}>
+            <Icon name="logout" />
+          </button>
+        :
           <Link href={"/login"} about="login">
-            <Icon name="profile" width={36} height={36} />
+            <Icon name="login" />
           </Link>
+        }
         </div>
         <div className="col title">
           <Link href={"/"} about="home" >
@@ -16,7 +26,9 @@ export default function Header() {
             <h4>Logs</h4>
           </Link>
           <div className="row sns">
-            <Icon name="instagram" />
+            <Link href={"https://instagram.com/jukyung_s"} about="instagram">
+              <Icon name="instagram" />
+            </Link>
           </div>
         </div>
         
