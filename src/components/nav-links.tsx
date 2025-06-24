@@ -1,14 +1,23 @@
 'use client'
-import Link from "next/link"
-import { useState } from "react"
+
+import Link from "next/link";
+import { useState } from "react";
+import { usePathname } from "next/navigation";
 
 export default function Menus() {
-  const [isActive, setIsActive] = useState('home');
+  const [isActive, setIsActive] = useState('/');
+  const path = usePathname();
 
+  const currentPath = path === '/' ? '/' : path.split('/')[1];
+  if(currentPath !== isActive) {
+    setIsActive(currentPath);
+  }
+
+  
   const menus = [
     {
       href: '/',
-      about: 'home',
+      about: '/',
       name: 'Home'
     },
     {
