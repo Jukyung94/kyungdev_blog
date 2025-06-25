@@ -7,8 +7,10 @@ import { createForm } from '@/lib/actions';
 import { msgState } from '@/lib/definitions';
 
 export default function EditForm() {
-  const initialState: msgState = { code: "", message: ""}
+  const initialState: msgState = { code: "", message: ""};
   const [state, formAction, isPending] = useActionState(createForm, initialState);
+  // const [doc, setDoc] = useState<DocumentType>();
+
 
   return (
     <div className="page">

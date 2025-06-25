@@ -4,7 +4,7 @@ import { DocumentType } from '@/lib/definitions';
 import Comment from './comment';
 import { getDocumentById } from '@/lib/actions';
 import { userName } from '@/lib/data';
-import { Delete } from './formActions';
+import { Actions } from './formActions';
 
 export default async function ReadForm(props: { id: string }) {
   const doc: DocumentType = await getDocumentById(props.id);
@@ -27,10 +27,8 @@ export default async function ReadForm(props: { id: string }) {
           <hr />
           {user && (
             <div className='row wing'>
-              <button>
-                <span>EDIT</span>
-              </button>
-              <Delete id={props.id} />
+              <Actions type='edit' id={props.id} doc={doc}/>
+              <Actions type='delete' id={props.id} />
             </div>
           )}
           <div className="col">
