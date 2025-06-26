@@ -20,8 +20,9 @@
 
   --font-main: #111111;
   --font-secondary: #888888;
-  --font-m: 1rem;
   --font-s: 0.75rem;
+  --font-m: 1rem;
+  --font-l: 1.5rem;
 
   --page-gap: 2rem;
   --container-gap: 1.5rem;
@@ -63,6 +64,10 @@ div[id="content"] {
 
 .content > div {
   gap: var(--padding-s)
+}
+
+.content .gap {
+  gap: var(--padding-xs);
 }
 
 .content > p {
@@ -195,6 +200,36 @@ input {
   border: 1px solid var(--background-secondary);
   border-radius: 0.5rem;
   padding: var(--padding-s)
+}
+
+.prev_comment {
+  display: flex;
+  flex-direction: column;
+  gap: var(--padding-s);
+  padding: var(--padding-s) var(--padding-xs);
+}
+
+.comment {
+  /* background-color: var(--background-primary); */
+  border-radius: 0.5rem;
+  border: 1px solid var(--button-primary);
+  padding: var(--padding-m);
+  display: flex;
+  flex-direction: column;
+  gap: var(--padding-m);
+}
+
+.comment .name {
+  display: flex;
+  align-items: center;
+  gap: var(--padding-s);
+  font-size: var(--font-m);
+}
+
+.comment textarea {
+  border: 1px solid var(--background-secondary);
+  min-height: 50px;
+  padding: var(--padding-xs)
 }
 
 @media only screen and (max-width: 600)  {

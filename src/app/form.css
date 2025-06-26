@@ -36,6 +36,6 @@ form textarea {
   padding: var(--padding-s)
 }
 
-/* form button {
+form button {
   align-self: flex-end;
-} */
+}
