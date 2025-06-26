@@ -67,6 +67,42 @@ export async function createForm(state: msgState, form: FormData) {
   redirect('/');
 };
 
+export async function editForm(state: msgState, form: FormData) {
+  const path = form.get("path");
+  const title = form.get("title");
+  const content = form.get("content");
+  const author = "Jukyung";
+  const date = form.get("date");
+  const no = Number(form.get("id"));
+  const id = form.get("id");
+
+  if(!path || !title || !content) {
+    return {
+      code: "fail",
+      message: "fields are empty"
+    } as msgState;
+  }
+
+  try {
+    await setDoc(doc(db, "documents", `${id}`), {
+      path,
+      title,
+      content,
+      author,
+      date,
+      no
+    });
+
+  } catch (error) {
+    console.log(error);
+    return {
+      code: "fail",
+      message: "Fail to edit the article"
+    } as msgState;
+  }
+  redirect('/');
+};
+
 export async function getDocumentById(id: string) {
   const docRef = doc(db, "documents", id);
   const docSnap = await getDoc(docRef);

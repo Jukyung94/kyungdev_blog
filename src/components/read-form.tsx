@@ -27,7 +27,7 @@ export default async function ReadForm(props: { id: string }) {
           <hr />
           {user && (
             <div className='row wing'>
-              <Actions type='edit' id={props.id} doc={doc}/>
+              <Actions type='edit' id={props.id}/>
               <Actions type='delete' id={props.id} />
             </div>
           )}

@@ -3,10 +3,11 @@
 import { deleteDocumentById } from "@/lib/actions";
 import { DocumentType } from "@/lib/definitions";
 import Link from "next/link";
-import { redirect } from "next/navigation";
+import { redirect, usePathname } from "next/navigation";
 
-export function Actions(props: {type: string,  id : string, doc?: DocumentType}) {
-  const { type, id, doc } = props;
+export function Actions(props: {type: string,  id : string}) {
+  const { type, id } = props;
+  const path = usePathname();
   if(type === 'delete') {
     return(
        <button onClick={async () => {
@@ -22,8 +23,8 @@ export function Actions(props: {type: string,  id : string, doc?: DocumentType})
     )
   } else if (type === 'edit') {
     return(
-      <button onClick={() => console.log(doc)}>
-        <Link href={{pathname: '/edit', query: doc}} >
+      <button>
+        <Link href={`${path}/edit`}>
           <span>EDIT</span>
         </Link>
      </button>
