@@ -73,6 +73,7 @@ export async function editForm(state: msgState, form: FormData) {
   const content = form.get("content");
   const author = "Jukyung";
   const date = form.get("date");
+  const lastmodified = new Date().toISOString().split('T')[0];
   const no = Number(form.get("id"));
   const id = form.get("id");
 
@@ -90,6 +91,7 @@ export async function editForm(state: msgState, form: FormData) {
       content,
       author,
       date,
+      lastmodified,
       no
     });
 

@@ -15,9 +15,10 @@ export default async function ReadForm(props: { id: string }) {
         <div className="content col">
           <div className="col">
             <h2>{doc.title}</h2>
-            <div className="row">
-              <span>{doc.date}</span>
-              <span>{doc.author}</span>
+            <span>{doc.author}</span>
+            <div className="row gap">
+              <span>Created: {doc.date}</span>
+              <span>Last Modified: {doc.lastmodified ?? doc.date}</span>
             </div>
           </div>
           <hr />

@@ -12,6 +12,7 @@ export type User = {
 export type DocumentType = {
   title: string;
   date: string;
+  lastmodified?: string;
   author: string;
   content: string;
   path: string;
