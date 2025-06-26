@@ -1,7 +1,6 @@
 'use client';
 
 import { deleteDocumentById } from "@/lib/actions";
-import { DocumentType } from "@/lib/definitions";
 import Link from "next/link";
 import { redirect, usePathname } from "next/navigation";
 
