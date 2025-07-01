@@ -21,11 +21,12 @@ export default function Comment(props: { id: string }) {
       <div className="col gap">
         <span>Comments</span>
         <hr />
-        <div className="prev_comment">
+        <div className="col">
           {prevComments?.map((item, idx) => (
-            <div key={idx}>
-              <div>{item.author}</div>
+            <div key={idx} className="prev_comment">
+              <div className="title">{item.author}</div>
               <div>{item.content}</div>
+              <hr />
             </div>
           ))}
         </div>
