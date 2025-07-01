@@ -17,7 +17,7 @@ export default function Form() {
         <div className="content col">
           <form action={formAction}>
             <div className="title">
-              <select name="path" id="path">
+              <select name="path" id="path" >
                 <option value="/dev">Dev</option>
                 <option value="/logs">Logs</option>
               </select>

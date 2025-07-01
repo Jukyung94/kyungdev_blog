@@ -21,21 +21,38 @@ form .title {
   display: flex;
   width: 100%;
   align-items: center;
+  border-bottom: 1px solid var(--background-secondary);
 }
 
-form .title input {
-  border-bottom: 1px solid var(--background-secondary);
+/* form .title input {
   border-radius: 0;
-}
+} */
 
 form textarea {
   border: 1px solid var(--background-secondary);
   width: 100%;
   height: 500px;
   outline: none;
-  padding: var(--padding-s)
+  padding: var(--padding-s);
+}
+
+form textarea:read-only {
+  border: none;
+  width: 100%;
+  outline: none;
+  padding: 0 !important;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: var(--font-m);
+}
+
+form select {
+  border: none;
+  outline: none;
+  padding: var(--padding-xs);
+  cursor: pointer;
 }
 
 form button {
   align-self: flex-end;
 }
+
