@@ -1,5 +1,5 @@
 import EditForm from "@/components/edit-form";
-import { getDocumentById } from "@/lib/actions";
+import { getDocumentById } from "@/lib/data";
 import { DocumentType } from "@/lib/definitions";
 
 export default async function Page(props: { params: Promise<{ id: string }>}) {

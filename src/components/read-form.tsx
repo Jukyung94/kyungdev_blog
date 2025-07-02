@@ -3,7 +3,7 @@ import '@/index.css';
 import '@/form.css';
 import { DocumentType } from '@/lib/definitions';
 import Comment from './comment';
-import { getDocumentById } from '@/lib/actions';
+import { getDocumentById } from '@/lib/data';
 import { userName } from '@/lib/data';
 import { Actions } from './formActions';
 

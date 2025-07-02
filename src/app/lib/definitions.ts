@@ -20,9 +20,9 @@ export type DocumentType = {
 }
 
 export type CommentType = {
-  author: string;
+  name: string;
   password?: string;
-  content: string;
+  comment: string;
 }
 
 export type msgState = {

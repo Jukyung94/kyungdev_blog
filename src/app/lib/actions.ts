@@ -2,12 +2,14 @@
 
 import { doc, getDoc, setDoc, getDocs, collection, query, orderBy, limit, where, deleteDoc } from "firebase/firestore";
 import { db } from "../../../firebase.config";
-import { DocumentType, msgState } from "./definitions";
+import { DocumentType, msgState, CommentType } from "./definitions";
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 
 const documents = collection(db, "documents");
 const users = collection(db, "users");
+const comments = collection(db, "comments");
+
 
 export async function createForm(state: msgState, form: FormData) {
   const path = form.get("path");
@@ -105,26 +107,6 @@ export async function editForm(state: msgState, form: FormData) {
   redirect('/');
 };
 
-export async function getDocumentById(id: string) {
-  const docRef = doc(db, "documents", id);
-  const docSnap = await getDoc(docRef);
-  if(docSnap.exists()) {
-    console.log(docSnap.data())
-    const document = docSnap.data() as DocumentType
-    return document;
-  } else {
-    const document: DocumentType = {
-      title: "No Data",
-      date: "",
-      author: "anonymous",
-      content: "No data",
-      path: "/no",
-      no: 0
-    }
-    return document;
-  };
-};
-
 export async function deleteDocumentById(id: string) {
   try  {
     const docRef = doc(db, "documents", id);
@@ -173,6 +155,14 @@ export async function logIn(state: msgState, form: FormData) {
 
   redirect('/');
 };
+
+
+export async function getCommentsById(id: string) {
+  const data = await getDocs(query(comments, where("id", "==", id)));
+  const commentsArr = data.docs.map((item) => item.data() as CommentType);
+  
+  return commentsArr;
+}
 
 export async function logOut() {
   const cookie = await cookies();
