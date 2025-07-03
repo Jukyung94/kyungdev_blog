@@ -162,6 +162,10 @@ export async function getCommentsById(id: string) {
   const commentsArr = data.docs.map((item) => item.data() as CommentType);
   
   return commentsArr;
+};
+
+export async function createComment(comment: CommentType) {
+  console.log(comment)
 }
 
 export async function logOut() {

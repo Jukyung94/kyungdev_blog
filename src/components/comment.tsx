@@ -1,6 +1,6 @@
 'use client';
 
-import { getCommentsById } from "@/lib/actions";
+import { createComment, getCommentsById } from "@/lib/actions";
 import { CommentType } from "@/lib/definitions";
 import { useEffect, useState } from "react"
 
@@ -42,10 +42,10 @@ export default function Comment(props: { id: string }) {
             }}/>
           </div>
           <textarea name="comment" id="" placeholder="Comment" value={comment.comment} onChange={(event) => {
-            setComment({...comment, name: event.target.value})
+            setComment({...comment, comment: event.target.value})
           }} />
           <div className="row wing">
-            <button>
+            <button onClick={async () => await createComment(comment)}>
               <span>SUBMIT</span>
             </button>
           </div>
