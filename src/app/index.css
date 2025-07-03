@@ -17,6 +17,7 @@
   --padding-xl: 2rem;
 
   --content-padding: 0 20%;
+  --content-padding-s: 0 5%;
 
   --font-main: #111111;
   --font-secondary: #888888;
@@ -94,6 +95,7 @@ div[id="content"] {
 }
 
 .row.middle {
+  /* justify-content: center; */
   align-items: center;
 }
 
@@ -263,6 +265,10 @@ input {
     align-items: center;
   }
 
+  header .title {
+    width: 100%;
+  }
+
   header > .row {
     flex-direction: column;
   }
@@ -274,7 +280,7 @@ input {
   }
 
   .container {
-    padding: 0;
+    padding: var(--content-padding-s);
   }
 }
 

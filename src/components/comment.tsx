@@ -6,7 +6,7 @@ import { useEffect, useState } from "react"
 
 export default function Comment(props: { id: string }) {
   const [comment, setComment] = useState<CommentType>({ name: "", password: "", comment: ""});
-  const [prevComments, setPrevComments] = useState<CommentType[]>();
+  const [prevComments, setPrevComments] = useState<CommentType[]>([]);
 
 
   useEffect(() => {
@@ -19,18 +19,21 @@ export default function Comment(props: { id: string }) {
   }
 
   return(
-      <div className="col gap">
+      <div className="content col gap">
         <span>Comments</span>
-        <hr />
-        <div className="col">
-          {prevComments?.map((item, idx) => (
-            <div key={idx} className="prev_comment">
-              <div className="title">{item.name}</div>
-              <div>{item.comment}</div>
-              <hr />
-            </div>
-          ))}
-        </div>
+        {prevComments.length === 0 ? 
+          <div className="row middle">No comments</div> 
+        : 
+          <div className="col">
+            {prevComments?.map((item, idx) => (
+              <div key={idx} className="prev_comment">
+                <div className="title">{item.name}</div>
+                <div>{item.comment}</div>
+                <hr />
+              </div>
+            ))}
+          </div>
+        }
         <div className="comment">
           <div className="name">
             <label htmlFor="name">name</label>
