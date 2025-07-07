@@ -7,7 +7,7 @@ import Header from "@/components/header";
 
 export const metadata: Metadata = {
   title: "Jukyung Dev",
-  description: "Logs",
+  description: "Jukyung Dev Logs",
 };
 
 export default function RootLayout({
