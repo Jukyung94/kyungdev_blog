@@ -1,6 +1,6 @@
 'use server';
 
-import { doc, getDoc, setDoc, getDocs, collection, query, orderBy, limit, where, deleteDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc, getDocs, collection, query, orderBy, limit, where, deleteDoc, addDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "../../../firebase.config";
 import { DocumentType, msgState, CommentType } from "./definitions";
 import { redirect } from "next/navigation";
@@ -11,7 +11,7 @@ const users = collection(db, "users");
 const comments = collection(db, "comments");
 
 
-export async function createForm(state: msgState, form: FormData) {
+export async function createDocument(state: msgState, form: FormData) {
   const path = form.get("path");
   const title = form.get("title");
   const content = form.get("content");
@@ -69,7 +69,7 @@ export async function createForm(state: msgState, form: FormData) {
   redirect('/');
 };
 
-export async function editForm(state: msgState, form: FormData) {
+export async function editDocument(state: msgState, form: FormData) {
   const path = form.get("path");
   const title = form.get("title");
   const content = form.get("content");
@@ -158,14 +158,48 @@ export async function logIn(state: msgState, form: FormData) {
 
 
 export async function getCommentsById(id: string) {
-  const data = await getDocs(query(comments, where("id", "==", id)));
-  const commentsArr = data.docs.map((item) => item.data() as CommentType);
+  const data = await getDocs(query(comments, where("id", "==", id), orderBy("time", "asc")));
+  const commentsArr = data.docs.map((item) => {
+    console.log(item)
+    const comment = {...item.data(), time: new Date(item.data().time.toMillis()).toLocaleString("en-GB"), cid: item.id}
+    return comment as CommentType;
+  });
   
   return commentsArr;
 };
 
-export async function createComment(comment: CommentType) {
-  console.log(comment)
+export async function addComment(comment: CommentType) {
+  try {
+    await addDoc(comments, {...comment, time: serverTimestamp()});
+    return {
+      code: "success",
+      message: "Comment added"
+    } as msgState;
+  } catch(err) {
+    return {
+      code: "fail",
+      message: "Failed to add comment"
+    } as msgState;
+  }
+};
+
+export async function deleteCommentById(cid: string) {
+  try  {
+    const docRef = doc(db, "comments", cid);
+    const docSnap = await getDoc(docRef);
+    console.log(docSnap.data())
+    if(!docSnap.data()) throw new Error("Undefined comment");
+
+    await deleteDoc(docRef);
+
+    return {
+      code: "success",
+      message: "Delete completed"
+    } as msgState
+  } catch (error) {
+    const err = error as msgState
+    return err
+  }
 }
 
 export async function logOut() {
