@@ -3,13 +3,13 @@
 import '@/globals.css';
 import '@/form.css';
 import { useActionState } from 'react';
-import { createForm } from '@/lib/actions';
+import { createDocument } from '@/lib/actions';
 import { msgState } from '@/lib/definitions';
 import Error from './error';
 
 export default function Form() {
   const initialState: msgState = { code: "", message: ""}
-  const [state, formAction, isPending] = useActionState(createForm, initialState);
+  const [state, formAction, isPending] = useActionState(createDocument, initialState);
 
   return (
     <div className="page">

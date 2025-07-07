@@ -17,12 +17,16 @@ export type DocumentType = {
   content: string;
   path: string;
   no: number;
+  pinned?: boolean;
 }
 
 export type CommentType = {
   name: string;
   password?: string;
-  comment: string;
+  content: string;
+  id?: string;
+  time?: string;
+  cid?: string;
 }
 
 export type msgState = {

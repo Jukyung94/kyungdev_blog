@@ -1,11 +1,19 @@
 import Link from "next/link";
-import { fetchDocuments } from "@/lib/data";
+import { fetchDocuments, userName } from "@/lib/data";
+import { Icons as Icon } from "@/components/icon";
 
 export default async function Home() {
   const articles = await fetchDocuments();
-
+  const user = await userName();
   return (
     <div className="container col gap">
+      {user === "Jukyung" && (
+        <button>
+          <Link href={"/create"}>
+            <Icon name="add" />
+          </Link>
+        </button>
+      )}
       {articles.map(item => (
         <div key={item.no}>
           <Link href={{ pathname: `${item.path}/${item.no}`, query: item}} as={`${item.path}/${item.no}`}>

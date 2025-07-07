@@ -10,13 +10,16 @@ export function Icons({ name, width = 24, height = 24 }: IconType) {
   const map: { [key: string] : string }  = {
     profile: "mdi:account-circle-outline",
     instagram: "mdi:instagram",
+    github: "mdi:github",
     twitter: "",
     email: "",
     share: "mdi:share-variant-outline",
     back: "mdi:arrow-back",
     error: "mdi:alert-circle-outline",
     login: "mdi:login",
-    logout: "mdi:logout"
+    logout: "mdi:logout",
+    add: "mdi:add",
+    remove: "mdi:remove",
   }
 
   if (map[name]) {

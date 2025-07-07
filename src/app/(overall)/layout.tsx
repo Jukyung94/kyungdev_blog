@@ -4,6 +4,7 @@ import "../index.css";
 import Menus from "@/components/nav-links";
 import Footer from "@/components/footer";
 import Header from "@/components/header";
+import { userName } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: "Jukyung Dev",

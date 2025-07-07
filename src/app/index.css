@@ -214,8 +214,29 @@ input {
   padding: var(--padding-s) var(--padding-xs);
 }
 
-.prev_comment > .title {
+.prev_comment .title {
   font-weight: bold;
+}
+
+.prev_comment .time {
+  display: flex;
+  font-size: var(--font-s);
+  align-items: center;
+  padding-left: var(--padding-m);
+}
+
+.prev_comment .remove {
+  display: flex;
+  flex: 1 0 auto;
+  justify-content: end;
+}
+
+.remove > button {
+  background-color: #fff;
+}
+
+.remove > button:hover {
+  background-color: var(--background-secondary);
 }
 
 .prev_comment > hr {

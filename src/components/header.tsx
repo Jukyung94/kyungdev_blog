@@ -26,8 +26,11 @@ export default async function Header() {
             <h4>Logs</h4>
           </Link>
           <div className="row sns">
-            <Link href={"https://instagram.com/jukyung_s"} about="instagram">
+            <Link href={"https://instagram.com/jukyung_s"} about="instagram" target="/">
               <Icon name="instagram" />
+            </Link>
+            <Link href={"https://github.com/Jukyung94"} about="instagram" target="/">
+              <Icon name="github" />
             </Link>
           </div>
         </div>
