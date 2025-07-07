@@ -175,11 +175,9 @@ export async function addComment(comment: CommentType) {
       code: "success",
       message: "Comment added"
     } as msgState;
-  } catch(err) {
-    return {
-      code: "fail",
-      message: "Failed to add comment"
-    } as msgState;
+  } catch(error) {
+    const err = error as msgState;
+    return err;
   }
 };
 

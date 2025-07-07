@@ -16,7 +16,7 @@ export default async function ReadForm(props: { id: string }) {
       <form className="content col">
         <div className="col">
           <h2>{title}</h2>
-          {/* <span>{author}</span> */}
+          <span hidden>{author}</span>
           <div className="row gap">
             <span>Created: {date}</span>
             <span>Last Modified: {lastmodified ?? date}</span>
