@@ -10,10 +10,6 @@ export const metadata: Metadata = {
   description: "Jukyung Dev Logs",
 };
 
-export const viewport: Viewport = {
-  width: "device-width, initial-scale=1.0"
-}
-
 export default function RootLayout({
   children,
 }: Readonly<{
