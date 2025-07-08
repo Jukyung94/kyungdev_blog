@@ -183,6 +183,11 @@ export async function addComment(comment: CommentType) {
 
 export async function deleteCommentById(cid: string) {
   try  {
+    const cookie = await cookies();
+    const user = cookie.get("user")?.value;
+    if(!user) throw new Error("You are not logged in");
+
+
     const docRef = doc(db, "comments", cid);
     const docSnap = await getDoc(docRef);
     console.log(docSnap.data())
@@ -195,7 +200,10 @@ export async function deleteCommentById(cid: string) {
       message: "Delete completed"
     } as msgState
   } catch (error) {
-    const err = error as msgState
+    const err: msgState = {
+      code: "fail",
+      message: error instanceof Error ? error.message : String(error)
+    };
     return err
   }
 }

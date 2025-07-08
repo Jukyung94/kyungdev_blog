@@ -39,7 +39,14 @@ export default function Comment(props: { id: string }) {
                       if(confirm('Delete comment?')) {
                         if(item.cid) {
                           const res: msgState = await deleteCommentById(item.cid);
-                          if(res.code === "success") getPrevComments();
+                          switch(res.code) {
+                            case "success":
+                              getPrevComments();
+                              break;
+                            case "fail":
+                              alert(res.message);
+                              break;
+                          }
                         }
                         else alert('Undefined Id')
                       }
