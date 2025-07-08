@@ -8,7 +8,12 @@ import Header from "@/components/header";
 export const metadata: Metadata = {
   title: "Jukyung Dev",
   description: "Jukyung Dev Logs",
+  robots: "all",
+  verification: {
+    google: "TdaNJiQD7gA75p8gAXHsvkJe6cARJtxpcJYI-7B6BVM"
+  }
 };
+
 
 export default function RootLayout({
   children,
