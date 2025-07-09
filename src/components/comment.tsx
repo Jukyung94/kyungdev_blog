@@ -14,7 +14,7 @@ export default function Comment(props: { id: string }) {
 
   useEffect(() => {
     getPrevComments();
-  }, [])
+  }, []);
 
   async function getPrevComments() {
     const comments =  await getCommentsById(id);

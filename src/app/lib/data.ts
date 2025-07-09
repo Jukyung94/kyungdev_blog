@@ -73,7 +73,7 @@ export async function fetchComments() {
 export async function userName() {
   const cookie = await cookies();
   const user = cookie.get("user")?.value;
-  console.log(user);
+  // console.log(user);
 
   return user;
 }
