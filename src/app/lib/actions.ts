@@ -18,7 +18,7 @@ webpush.setVapidDetails(
   process.env.VAPID_PRIVATE_KEY!
 );
 
-let subscription: PushSubscription;
+let subscription: PushSubscription | null = null;
 
 export async function subscribe(sub: PushSubscription) {
   subscription = sub;
@@ -30,6 +30,9 @@ export async function subscribe(sub: PushSubscription) {
 };
 
 export async function sendNoti(message: string) {
+  if(!subscription) {
+    throw new Error("No subscription found. Please subscribe first.");
+  }
   try {
     await webpush.sendNotification(
       subscription,
