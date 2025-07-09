@@ -57,7 +57,8 @@ export default function ServiceWorker() {
       applicationServerKey: urlBase64ToUint8Array(process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY!),
     });
     // setSubscription(sub);
-    await subscribe(sub)
+    const serializedSubscription = JSON.parse(JSON.stringify(sub));
+    await subscribe(serializedSubscription)
   };
   if(!isSupported) {
     console.warn('Push notifications are not supported in this browser.');
