@@ -33,6 +33,7 @@ export async function sendNoti(message: string) {
   if(!subscription) {
     throw new Error("No subscription found. Please subscribe first.");
   }
+  console.log(subscription);
   try {
     await webpush.sendNotification(
       subscription,
@@ -42,7 +43,10 @@ export async function sendNoti(message: string) {
         icon: "/icon.png",
       })
     );
-    return { success: true }
+    return {
+      code: "success",
+      message: "Notification sent successfully"
+    } as msgState;
   } catch (error) {
     console.error("Error sending notification:", error);
   }
@@ -178,7 +182,6 @@ export async function getCommentsById(id: string) {
 export async function addComment(comment: CommentType) {
   try {
     await addDoc(comments, {...comment, time: serverTimestamp()});
-    await sendNoti("New comment added");
     return {
       code: "success",
       message: "Comment added"
