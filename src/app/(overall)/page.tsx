@@ -1,12 +1,10 @@
 import Link from "next/link";
 import { fetchDocuments, userName } from "@/lib/data";
 import { Icons as Icon } from "@/components/icon";
-import ServiceWorker from "@/components/sw";
 
 export default async function Home() {
   const articles = await fetchDocuments();
   const user = await userName();
-
 
   return (
     <div className="container col gap">
@@ -30,7 +28,6 @@ export default async function Home() {
           </Link>
         </div>
       ))}
-      <ServiceWorker />
     </div>
   );
 }

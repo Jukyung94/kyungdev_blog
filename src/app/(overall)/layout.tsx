@@ -4,6 +4,7 @@ import "../index.css";
 import Menus from "@/components/nav-links";
 import Footer from "@/components/footer";
 import Header from "@/components/header";
+import ServiceWorker from "@/components/sw";
 
 export const metadata: Metadata = {
   title: "Jukyung Dev",
@@ -30,6 +31,7 @@ export default function RootLayout({
         {children}
       </div>
         <Footer />
+      <ServiceWorker />
     </div>
   );
 }
