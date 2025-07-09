@@ -1,15 +1,15 @@
 'use client';
 
 import { subscribe } from "@/lib/actions";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 export default function ServiceWorker() {
-  const [isSupported, setIsSupported] = useState(false);
+  // const [isSupported, setIsSupported] = useState(false);
   // const [subscription, setSubscription] = useState<PushSubscription | null>(null);
 
   useEffect(() => {
     if('serviceWorker' in navigator && 'PushManager' in window) {
-      setIsSupported(true);
+      // setIsSupported(true);
       registerServiceWorker();
       askPermission();
     }
@@ -60,8 +60,6 @@ export default function ServiceWorker() {
     const serializedSubscription = JSON.parse(JSON.stringify(sub));
     await subscribe(serializedSubscription)
   };
-  if(!isSupported) {
-    console.warn('Push notifications are not supported in this browser.');
-  }
+  
   return null;
 };
