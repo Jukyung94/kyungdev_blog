@@ -48,7 +48,10 @@ export async function sendNoti(message: string) {
       message: "Notification sent successfully"
     } as msgState;
   } catch (error) {
-    console.error("Error sending notification:", error);
+    return {
+      code: "fail",
+      message: `Failed to send notification: ${error instanceof Error ? error.message : String(error)}`
+    } as msgState;
   }
 }
 
