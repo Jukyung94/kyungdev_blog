@@ -1,4 +1,5 @@
-'use client'
+'use client';
+
 import { useActionState } from "react"
 import Link from "next/link";
 import "../login.css";
@@ -11,7 +12,18 @@ import Error from "@/components/error";
 export default function Page() {
   const initialState: msgState = { code: "", message: ""}
   const [state, formAction, isPending] = useActionState(logIn, initialState);
-
+  if (!('serviceWorker' in navigator)) {
+    console.warn("Service Worker is not supported in this browser.");
+  } else {
+    console.log("Service Worker is supported.");
+  }
+  const test = window.location;
+  console.log(test)
+  if (!('PushManager' in window)) {
+    console.warn("PushManager is not supported in this browser.");
+  } else {
+    console.log("PushManager is supported.");
+  }
   return (
     <div className="login col">
       <div className="box">

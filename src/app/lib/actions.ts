@@ -5,10 +5,45 @@ import { db } from "../../../firebase.config";
 import { DocumentType, msgState, CommentType } from "./definitions";
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
+import webpush, { PushSubscription } from "web-push";
 
 const documents = collection(db, "documents");
 const users = collection(db, "users");
 const comments = collection(db, "comments");
+
+//setup notification
+webpush.setVapidDetails(
+  "mailto: <jukyung.dev@gmail.com>",
+  process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY!,
+  process.env.VAPID_PRIVATE_KEY!
+);
+
+let subscription: PushSubscription;
+
+export async function subscribe(sub: PushSubscription) {
+  subscription = sub;
+  console.log("Subscribed to push notifications", subscription);
+  return {
+    code: "success",
+    message: "Subscribed to push notifications"
+  } as msgState;
+};
+
+export async function sendNoti(message: string) {
+  try {
+    await webpush.sendNotification(
+      subscription,
+      JSON.stringify({
+        title: "Notification",
+        body: message,
+        icon: "/icon.png",
+      })
+    );
+    return { success: true }
+  } catch (error) {
+    console.error("Error sending notification:", error);
+  }
+}
 
 
 export async function createDocument(state: msgState, form: FormData) {
@@ -126,37 +161,6 @@ export async function deleteDocumentById(id: string) {
   }
 }
 
-export async function logIn(state: msgState, form: FormData) {
-  try {
-    const username = form.get("username");
-    const password = form.get("password");
-
-    if(!username || !password)  throw new Error('invalid username or password');
-
-    const data = await getDocs(query(users, where("username", "==", username)));
-
-    if(data.docs.length === 0) throw new Error('user not exist');
-
-    const userArr = data.docs.map(item => item.data());
-
-    const user = userArr[0];
-    if(password !== user.password) throw new Error('invalid password');
-    
-    const cookie = await cookies();
-    cookie.set("user", `${username}`);
-
-  } catch (error) {
-    const err = error as msgState;
-    return {
-      code: "fail",
-      message: err.message
-    } as msgState;
-  }
-
-  redirect('/');
-};
-
-
 export async function getCommentsById(id: string) {
   const data = await getDocs(query(comments, where("id", "==", id), orderBy("time", "asc")));
   const commentsArr = data.docs.map((item) => {
@@ -171,6 +175,7 @@ export async function getCommentsById(id: string) {
 export async function addComment(comment: CommentType) {
   try {
     await addDoc(comments, {...comment, time: serverTimestamp()});
+    await sendNoti("New comment added");
     return {
       code: "success",
       message: "Comment added"
@@ -207,7 +212,37 @@ export async function deleteCommentById(cid: string) {
     };
     return err
   }
-}
+};
+
+export async function logIn(state: msgState, form: FormData) {
+  try {
+    const username = form.get("username");
+    const password = form.get("password");
+
+    if(!username || !password)  throw new Error('invalid username or password');
+
+    const data = await getDocs(query(users, where("username", "==", username)));
+
+    if(data.docs.length === 0) throw new Error('user not exist');
+
+    const userArr = data.docs.map(item => item.data());
+
+    const user = userArr[0];
+    if(password !== user.password) throw new Error('invalid password');
+    
+    const cookie = await cookies();
+    cookie.set("user", `${username}`);
+
+  } catch (error) {
+    const err = error as msgState;
+    return {
+      code: "fail",
+      message: err.message
+    } as msgState;
+  }
+
+  redirect('/');
+};
 
 export async function logOut() {
   const cookie = await cookies();

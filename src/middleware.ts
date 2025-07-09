@@ -6,7 +6,8 @@ export const config = {
 
 export async function middleware(request: NextRequest) {
   const user = request.cookies.get("user")?.value;
-  const redirectToDoc = request.nextUrl.href.split("/edit")[0];
+  const path = request.nextUrl.href;
+  const redirectToDoc = path.includes("/edit") ? path.split("/edit")[0] : path;
   //check if user is logged in
   if(!user || user !== "Jukyung") {
     if(request.nextUrl.pathname === "/create") {

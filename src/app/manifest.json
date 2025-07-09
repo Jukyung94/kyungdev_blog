@@ -1,6 +1,6 @@
 {
-  "name": "kyungdev_blog",
-  "short_name": "kyungdev_blog",
+  "name": "KyungDev",
+  "short_name": "Dev blog",
   "description": "Kyungdev's personal blog",
   "start_url": "/",
   "display": "standalone",
