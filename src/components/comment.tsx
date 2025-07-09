@@ -89,7 +89,7 @@ export default function Comment(props: { id: string }) {
                     switch(res.code) {
                       case "success":
                         getPrevComments();
-                        const noti = await sendNoti("New comment added");
+                        const noti = await sendNoti(`New comment from ${comment.name}, ${comment.content}`);
                         console.log(noti);
                         break;
                       case "fail":
