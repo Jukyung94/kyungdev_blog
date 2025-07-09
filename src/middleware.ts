@@ -6,7 +6,13 @@ export const config = {
 
 export async function middleware(request: NextRequest) {
   const user = request.cookies.get("user")?.value;
+  const redirectToDoc = request.nextUrl.href.split("/edit")[0];
+  //check if user is logged in
   if(!user || user !== "Jukyung") {
-    return NextResponse.redirect(new URL("/", request.url));
+    if(request.nextUrl.pathname === "/create") {
+      return NextResponse.redirect(new URL("/", request.url));
+    } else {
+      return NextResponse.redirect(new URL(redirectToDoc, request.url));
+    }
   }
 }
