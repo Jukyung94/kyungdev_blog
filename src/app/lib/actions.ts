@@ -19,8 +19,6 @@ webpush.setVapidDetails(
   process.env.NEXT_PUBLIC_VAPID_PRIVATE_KEY!
 );
 
-let subscription: PushSubscription | null = null;
-
 export async function saveSubscriptionData(sub: PushSubscription) {
   console.log(sub);
   const dupQuery = query(subscriptions, where("keys.auth", "==", sub.keys.auth));
@@ -34,30 +32,19 @@ export async function saveSubscriptionData(sub: PushSubscription) {
   };
 };
 
-export async function subscribe(sub: PushSubscription) {
-  subscription = sub;
-  console.log("Subscribed to push notifications", subscription);
-  return {
-    code: "success",
-    message: "Subscribed to push notifications"
-  } as msgState;
-};
-
 export async function sendNoti(message: string) {
   try {
-
     const data = await getDocs(subscriptions);
     const subArr = data.docs.map(item => item.data() as PushSubscription);
     if(subArr.length === 0) {
       throw new Error("No subscriptions found");
     } 
-
-    subArr.forEach(item => console.log("subscriiptions", item));
-    subArr.forEach(async(item) => {
+    // subArr.forEach(item => console.log("subscriiptions", item));
+    subArr.forEach(async (item) => {
       await webpush.sendNotification(
         item,
         JSON.stringify({
-          title: "Notification",
+          title: "New Comment",
           body: message,
           icon: "/icon.png",
         })

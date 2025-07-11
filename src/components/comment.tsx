@@ -4,14 +4,14 @@ import { addComment, getCommentsById, deleteCommentById, sendNoti } from "@/lib/
 import { CommentType, msgState } from "@/lib/definitions";
 import { useEffect, useState, useTransition } from "react";
 import { Icons as Icon } from "./icon";
-
+import { usePathname } from "next/navigation";
 export default function Comment(props: { id: string }) {
   const { id } = props;
   const [comment, setComment] = useState<CommentType>({ name: "", password: "", content: "", id});
   const [prevComments, setPrevComments] = useState<CommentType[]>([]);
   const [isPending, startTransition] = useTransition();
+  const router = usePathname();
   
-
   useEffect(() => {
     getPrevComments();
   }, []);
@@ -88,9 +88,9 @@ export default function Comment(props: { id: string }) {
                     const res: msgState = await addComment(comment);
                     switch(res.code) {
                       case "success":
-                        getPrevComments();
-                        const noti = await sendNoti(`New comment from ${comment.name}, ${comment.content}`);
+                        const noti = await sendNoti(`${router}\n ${comment.name}: ${comment.content}`);
                         console.log(noti);
+                        getPrevComments();
                         break;
                       case "fail":
                         alert(res.message);
