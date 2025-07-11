@@ -10,6 +10,7 @@ import webpush, { PushSubscription } from "web-push";
 const documents = collection(db, "documents");
 const users = collection(db, "users");
 const comments = collection(db, "comments");
+const subscriptions = collection(db, "subscription");
 
 //setup notification
 webpush.setVapidDetails(
@@ -19,6 +20,21 @@ webpush.setVapidDetails(
 );
 
 let subscription: PushSubscription | null = null;
+
+export async function saveSubscriptionData(sub: PushSubscription) {
+  console.log(sub);
+  const dupQuery = query(subscriptions, where("keys.auth", "==", sub.keys.auth))
+  const qData = await getDocs(dupQuery);
+  const data = await getDocs(subscriptions);
+  data.docs.map(item => {
+    console.log(item.data())
+  });
+
+  qData.docs.map(item => {
+    console.log("123123213",item.data())
+  });
+
+}
 
 export async function subscribe(sub: PushSubscription) {
   subscription = sub;
@@ -241,7 +257,6 @@ export async function logIn(state: msgState, form: FormData) {
     
     const cookie = await cookies();
     cookie.set("user", `${username}`);
-
   } catch (error) {
     const err = error as msgState;
     return {

@@ -29,6 +29,12 @@ form {
   gap: var(--padding-m);
 }
 
+input[id="login"] {
+  border: 1px solid var(--background-secondary) !important;
+  border-radius: 0.5rem;
+  padding: var(--padding-s)
+}
+
 
 @media only screen and (max-width: 600px) {
   .login {

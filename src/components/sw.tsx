@@ -1,32 +1,43 @@
 'use client';
 
-import { subscribe } from "@/lib/actions";
+import { askPermission, checkPermission, subscribeToPush } from "@/lib/notification";
+import { getCookie } from "@/lib/utils";
 import { useEffect } from "react";
 
+//service worker registration
 export default function ServiceWorker() {
-  // const [isSupported, setIsSupported] = useState(false);
-  // const [subscription, setSubscription] = useState<PushSubscription | null>(null);
-
+  const user = getCookie('user');
   useEffect(() => {
     if('serviceWorker' in navigator && 'PushManager' in window) {
-      // setIsSupported(true);
-      registerServiceWorker();
-      askPermission();
+      registration();
     }
   }, []);
 
-  function urlBase64ToUint8Array(base64String: string) {
-    const padding = '='.repeat((4 - base64String.length % 4) % 4);
-    const base64 = (base64String + padding).replace(/-/g, '+').replace(/_/g, '/');
-    
-    const rawData = window.atob(base64);
-    const outputArray = new Uint8Array(rawData.length);
-    for (let i = 0; i < rawData.length; ++i) {
-      outputArray[i] = rawData.charCodeAt(i);
+  async function registration() {
+    const check = await checkRegistration();
+    if(!check) {
+      registerServiceWorker();
+    } else {
+      console.log('service worker is already activated', check);
+      if(user === 'Jukyung') {
+        const permission = await checkPermission();
+        if(permission === 'granted') {
+          subscribeToPush();
+        } else {
+          askPermission()
+        }
+      }
     }
-    return outputArray;
+  }
+
+  //check is registerd
+  async function checkRegistration() {
+    const res = await navigator.serviceWorker.getRegistration()
+    console.log(res)
+    return res?.active?.state
   };
 
+  //register service worker
   async function registerServiceWorker() {
     return await navigator.serviceWorker.register('/sw.js', {
       scope: '/',
@@ -37,29 +48,7 @@ export default function ServiceWorker() {
     }).catch((error) => {
       console.error('Service Worker registration failed:', error);
     });
-  }
-
-  async function askPermission() {
-    const permission = await Notification.requestPermission();
-    if(permission === 'granted') {
-      console.log('Notification permission granted.');
-      subscribeToPush();
-    } else {
-      console.warn('Notification permission denied.');
-    }
-  }
-
-
-  async function subscribeToPush() {
-    const registration = await navigator.serviceWorker.ready;
-    const sub = await registration.pushManager.subscribe({
-      userVisibleOnly: true,
-      applicationServerKey: urlBase64ToUint8Array(process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY!),
-    });
-    // setSubscription(sub);
-    const serializedSubscription = JSON.parse(JSON.stringify(sub));
-    await subscribe(serializedSubscription)
   };
-  
+
   return null;
 };

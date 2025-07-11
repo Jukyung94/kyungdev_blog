@@ -30,7 +30,7 @@ export default function RootLayout({
       <div id="content">
         {children}
       </div>
-        <Footer />
+      <Footer />
       <ServiceWorker />
     </div>
   );

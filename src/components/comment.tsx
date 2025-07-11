@@ -1,6 +1,6 @@
 'use client';
 
-import { addComment, getCommentsById, deleteCommentById } from "@/lib/actions";
+import { addComment, getCommentsById, deleteCommentById, sendNoti } from "@/lib/actions";
 import { CommentType, msgState } from "@/lib/definitions";
 import { useEffect, useState, useTransition } from "react";
 import { Icons as Icon } from "./icon";
@@ -89,8 +89,8 @@ export default function Comment(props: { id: string }) {
                     switch(res.code) {
                       case "success":
                         getPrevComments();
-                        // const noti = await sendNoti(`New comment from ${comment.name}, ${comment.content}`);
-                        // console.log(noti);
+                        const noti = await sendNoti(`New comment from ${comment.name}, ${comment.content}`);
+                        console.log(noti);
                         break;
                       case "fail":
                         alert(res.message);
