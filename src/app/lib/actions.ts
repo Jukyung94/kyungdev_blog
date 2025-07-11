@@ -23,18 +23,16 @@ let subscription: PushSubscription | null = null;
 
 export async function saveSubscriptionData(sub: PushSubscription) {
   console.log(sub);
-  const dupQuery = query(subscriptions, where("keys.auth", "==", sub.keys.auth))
+  const dupQuery = query(subscriptions, where("keys.auth", "==", sub.keys.auth));
   const qData = await getDocs(dupQuery);
-  const data = await getDocs(subscriptions);
-  data.docs.map(item => {
-    console.log(item.data())
-  });
 
-  qData.docs.map(item => {
-    console.log("123123213",item.data())
-  });
-
-}
+  const dup = qData.docs.map(item => item.data())
+  if(dup.length > 0) {
+    return;
+  } else {
+    await addDoc(subscriptions, sub);
+  };
+};
 
 export async function subscribe(sub: PushSubscription) {
   subscription = sub;
@@ -46,19 +44,25 @@ export async function subscribe(sub: PushSubscription) {
 };
 
 export async function sendNoti(message: string) {
-  if(!subscription) {
-    throw new Error("No subscription found. Please subscribe first.");
-  }
-  console.log(subscription);
   try {
-    await webpush.sendNotification(
-      subscription,
-      JSON.stringify({
-        title: "Notification",
-        body: message,
-        icon: "/icon.png",
-      })
-    );
+
+    const data = await getDocs(subscriptions);
+    const subArr = data.docs.map(item => item.data() as PushSubscription);
+    if(subArr.length === 0) {
+      throw new Error("No subscriptions found");
+    } 
+
+    subArr.forEach(item => console.log("subscriiptions", item));
+    subArr.forEach(async(item) => {
+      await webpush.sendNotification(
+        item,
+        JSON.stringify({
+          title: "Notification",
+          body: message,
+          icon: "/icon.png",
+        })
+      );
+    })
     return {
       code: "success",
       message: "Notification sent successfully"

@@ -1,5 +1,6 @@
 import { saveSubscriptionData } from "./actions";
 
+//initialize notification permission
 export async function checkPermission() {
   const permissionState = Notification.permission;
   return permissionState;
@@ -22,6 +23,7 @@ export async function subscribeToPush() {
     applicationServerKey: urlBase64ToUint8Array(process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY!),
   });
   const serializedSubscription = JSON.parse(JSON.stringify(sub));
+  //add data to firestore via actions.ts
   await saveSubscriptionData(serializedSubscription);
 };
 
