@@ -88,7 +88,7 @@ export default function Comment(props: { id: string }) {
                     const res: msgState = await addComment(comment);
                     switch(res.code) {
                       case "success":
-                        const noti = await sendNoti(`${router}\n ${comment.name}: ${comment.content}`);
+                        const noti = await sendNoti(`${router}\n ${comment.name}:\n "${comment.content}"`);
                         console.log(noti);
                         getPrevComments();
                         break;

@@ -17,6 +17,7 @@
   --padding-xl: 2rem;
 
   --content-padding: 0 20%;
+  --content-padding-m: 0 10%;
   --content-padding-s: 0 5%;
 
   --font-main: #111111;
@@ -185,6 +186,13 @@ button > * {
 
 button > *[id="icon"] {
   padding: 0 !important;
+  background-color: transparent !important;
+}
+
+button>*[id="icon"]:hover {
+  padding: 0 !important;
+  background-color: var(--background-secondary);
+  border-radius: 0.5rem;
 }
 
 button:hover {
@@ -202,7 +210,7 @@ button.inactive{
 
 
 input {
-  border: 1px solid var(--background-secondary);
+  border: 1px solid var(--background-secondary) !important;
   border-radius: 0.5rem;
   padding: var(--padding-s)
 }
@@ -270,7 +278,13 @@ input {
   border: 0.5px solid var(--background-secondary);
 }
 
-@media only screen and (max-width: 600px)  {
+@media only screen and (max-width: 600px) {
+  .container {
+    padding: var(--content-padding-m);
+  }
+}
+
+@media only screen and (max-width: 300px)  {
   .nav {
     flex-direction: column;
     align-items: center;

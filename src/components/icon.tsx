@@ -11,8 +11,8 @@ export function Icons({ name, width = 24, height = 24 }: IconType) {
     profile: "mdi:account-circle-outline",
     instagram: "mdi:instagram",
     github: "mdi:github",
-    twitter: "",
-    email: "",
+    twitter: "mdi:twitter",
+    email: "mdi:email",
     share: "mdi:share-variant-outline",
     back: "mdi:arrow-back",
     error: "mdi:alert-circle-outline",
@@ -20,9 +20,15 @@ export function Icons({ name, width = 24, height = 24 }: IconType) {
     logout: "mdi:logout",
     add: "mdi:add",
     remove: "mdi:remove",
+    pinned: "mdi:pin",
+    unpinned: "mdi:pin-off-outline"
   }
 
   if (map[name]) {
-    return <Icon id="icon" icon={map[name]} width={width} height={height} />
+    if(name === 'unpinned') {
+      return <Icon style={{transform: 'rotate(45deg)'}} id="icon" icon={map[name]} width={width} height={height} />
+    } else {
+      return <Icon id="icon" icon={map[name]} width={width} height={height} />
+    }
   }
 }

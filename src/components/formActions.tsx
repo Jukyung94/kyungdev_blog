@@ -3,10 +3,13 @@
 import { deleteDocumentById } from "@/lib/actions";
 import Link from "next/link";
 import { redirect, usePathname } from "next/navigation";
+import { Icons as Icon } from "./icon";
+import { getCookie } from "@/lib/utils";
 
 export function Actions(props: {type: string,  id : string}) {
   const { type, id } = props;
   const path = usePathname();
+  const user = getCookie('user');
   if(type === 'delete') {
     return(
        <button onClick={async () => {
@@ -28,5 +31,25 @@ export function Actions(props: {type: string,  id : string}) {
         </Link>
      </button>
    )
+  } else if (type === 'pin') {
+    return(
+      <button onClick={(e) => {
+        e.preventDefault();
+        console.log(user);
+        return;
+      }}>
+        <Icon name='pinned' />
+      </button>
+    )
+  } else if (type === 'unpin') {
+    return(
+      <button onClick={(e) => {
+        e.preventDefault();
+        console.log('213')
+        return;
+      }}>
+        <Icon name='unpinned' />
+      </button>
+    )
   }
 };

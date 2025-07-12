@@ -9,13 +9,26 @@ import { Actions } from './formActions';
 export default async function ReadForm(props: { id: string }) {
   const doc: DocumentType = await getDocumentById(props.id);
   const { id } = props;
-  const { title, author, date, lastmodified, content } = doc;
+  const { title, author, date, lastmodified, content, pinned } = doc;
   const user = await userName();
 
   return (
       <form className="content col">
         <div className="col">
-          <h2>{title}</h2>
+          <div className="row gap">
+            <h2>{title}</h2>
+            {pinned ? 
+              <div>
+                <Actions type='pin' id={id} />
+              </div>
+            :
+            user ?
+              <div>
+                <Actions type='unpin' id={id} />
+              </div>
+            : <></>
+            }
+          </div>
           <span hidden>{author}</span>
           <div className="row gap">
             <span>Created: {date}</span>
