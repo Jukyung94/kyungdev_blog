@@ -4,16 +4,8 @@ import { cookies } from "next/headers";
 import { DocumentType } from "./definitions";
 
 export const dynamic = 'force-dynamic'
-const users = collection(db, "users");
 const documents = collection(db, "documents");
-const comments = collection(db, "comments");
-
-export async function fetchUsers() {
-  const data = await getDocs(users);
-  data.docs.map(item => {
-    console.log(item.data);
-  })
-}
+// const comments = collection(db, "comments");
 
 export async function fetchDocuments() {
   const data = await getDocs(query(documents, orderBy("no", "desc")));
@@ -22,7 +14,7 @@ export async function fetchDocuments() {
   });
 
   return documentsArr;
-}
+};
 
 export async function fetchDevDocuments() {
   const data = await getDocs(query(documents, where("path", "==", "/dev"), orderBy("no", "desc")));
@@ -31,7 +23,7 @@ export async function fetchDevDocuments() {
   });
 
   return documentsArr;
-}
+};
 
 export async function fetchLogDocuments() {
   const data = await getDocs(query(documents, where("path", "==", "/logs"), orderBy("no", "desc")));
@@ -40,7 +32,7 @@ export async function fetchLogDocuments() {
   });
 
   return documentsArr;
-}
+};
 
 export async function getDocumentById(id: string) {
   const docRef = doc(db, "documents", id);
@@ -62,18 +54,9 @@ export async function getDocumentById(id: string) {
   };
 };
 
-export async function fetchComments() {
-  const data = await getDocs(comments);
-  const commentsArr = data.docs.map((item) => item.data());
-
-  console.log(commentsArr);
-};
-
-
 export async function userName() {
   const cookie = await cookies();
   const user = cookie.get("user")?.value;
-  // console.log(user);
 
   return user;
-}
+};

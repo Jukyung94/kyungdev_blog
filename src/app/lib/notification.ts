@@ -16,6 +16,7 @@ export async function askPermission() {
   }
 };
 
+//push manager subscription
 export async function subscribeToPush() {
   const registration = await navigator.serviceWorker.ready;
   const sub = await registration.pushManager.subscribe({
@@ -26,8 +27,6 @@ export async function subscribeToPush() {
   //add data to firestore via actions.ts
   await saveSubscriptionData(serializedSubscription);
 };
-
-
 
 //parsing base64 to Unit8array
 function urlBase64ToUint8Array(base64String: string) {
