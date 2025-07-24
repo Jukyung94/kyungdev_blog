@@ -20,7 +20,7 @@ webpush.setVapidDetails(
 );
 
 export async function saveSubscriptionData(sub: PushSubscription) {
-  console.log(sub);
+  // console.log(sub);
   const dupQuery = query(subscriptions, where("keys.auth", "==", sub.keys.auth));
   const qData = await getDocs(dupQuery);
 
@@ -60,8 +60,7 @@ export async function sendNoti(message: string) {
       message: `Failed to send notification: ${error instanceof Error ? error.message : String(error)}`
     } as msgState;
   }
-}
-
+};
 
 export async function createDocument(state: msgState, form: FormData) {
   const path = form.get("path");
@@ -76,7 +75,7 @@ export async function createDocument(state: msgState, form: FormData) {
       code: "fail",
       message: "fields are empty"
     } as msgState;
-  }
+  };
 
   const q = query(documents, orderBy("no", "desc"), limit(1));
 
@@ -95,11 +94,11 @@ export async function createDocument(state: msgState, form: FormData) {
       code: "fail",
       message: error
     } as msgState;
-  }
+  };
  
-  if(!!id) {
-    console.log(path, title, content, author, date, id)
-  }
+  // if(!!id) {
+  //   console.log(path, title, content, author, date, id)
+  // };
 
   try {
     await setDoc(doc(db, "documents", id.toString()), {
@@ -110,14 +109,14 @@ export async function createDocument(state: msgState, form: FormData) {
       date,
       no: id
     });
-
   } catch (error) {
     console.log(error);
     return {
       code: "fail",
       message: "Fail to create an article"
     } as msgState;
-  }
+  };
+
   redirect('/');
 };
 
@@ -130,13 +129,15 @@ export async function editDocument(state: msgState, form: FormData) {
   const lastmodified = new Date().toISOString().split('T')[0];
   const no = Number(form.get("id"));
   const id = form.get("id");
+  const pinned = form.get("pinned");
+
 
   if(!path || !title || !content) {
     return {
       code: "fail",
       message: "fields are empty"
     } as msgState;
-  }
+  };
 
   try {
     await setDoc(doc(db, "documents", `${id}`), {
@@ -146,24 +147,45 @@ export async function editDocument(state: msgState, form: FormData) {
       author,
       date,
       lastmodified,
-      no
+      no,
+      pinned: pinned === "on" ? true : false
     });
-
   } catch (error) {
     console.log(error);
     return {
       code: "fail",
       message: "Fail to edit the article"
     } as msgState;
-  }
+  };
+
   redirect('/');
 };
+
+export async function pinDocumentById(id: string) {
+  const docRef = doc(db, "documents", id);
+  const docSnap = await getDoc(docRef).then(res => res.data());
+  // console.log(docSnap);
+
+  try {
+    await setDoc(docRef, {...docSnap, pinned: !docSnap?.pinned});
+    return {
+      code: "success",
+      message: "document pinned/unpinned successfully"
+    } as msgState
+  } catch (error) {
+    return {
+      code: "fail",
+      message: "fail to pin/unpin the document"
+    } as msgState;
+  }
+}
 
 export async function deleteDocumentById(id: string) {
   try  {
     const docRef = doc(db, "documents", id);
     const docSnap = await getDoc(docRef);
-    console.log(docSnap.data())
+    // console.log(docSnap.data())
+    
     if(!docSnap.data()) throw new Error("delete failed");
 
     await deleteDoc(docRef);
@@ -171,11 +193,12 @@ export async function deleteDocumentById(id: string) {
     return {
       code: "success",
       message: "delete completed"
-    } as msgState
+    } as msgState;
+
   } catch (error) {
     const err = error as msgState
     return err
-  }
+  };
 }
 
 export async function getCommentsById(id: string) {
@@ -263,4 +286,4 @@ export async function logOut() {
   const cookie = await cookies();
   cookie.delete("user");
   redirect('/')
-}
+};

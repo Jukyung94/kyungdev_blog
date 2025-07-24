@@ -1,6 +1,6 @@
 'use client';
 
-import { deleteDocumentById } from "@/lib/actions";
+import { deleteDocumentById, pinDocumentById } from "@/lib/actions";
 import Link from "next/link";
 import { redirect, usePathname } from "next/navigation";
 import { Icons as Icon } from "./icon";
@@ -33,9 +33,14 @@ export function Actions(props: {type: string,  id : string}) {
    )
   } else if (type === 'pin') {
     return(
-      <button onClick={(e) => {
+      <button onClick={async (e) => {
         e.preventDefault();
-        console.log(user);
+        const res = await pinDocumentById(id);
+        if(res.code === "success") {
+          console.log(res.message);
+          redirect(path)
+        }
+        // console.log(user);
         return;
       }}>
         <Icon name='pinned' />
@@ -43,8 +48,13 @@ export function Actions(props: {type: string,  id : string}) {
     )
   } else if (type === 'unpin') {
     return(
-      <button onClick={(e) => {
+      <button onClick={async (e) => {
         e.preventDefault();
+        const res = await pinDocumentById(id);
+        if(res.code === "success") {
+          console.log(res.message);
+          redirect(path)
+        }
         console.log('213')
         return;
       }}>

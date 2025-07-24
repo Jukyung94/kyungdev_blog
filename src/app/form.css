@@ -1,14 +1,23 @@
+/* =====================
+   Form Layout
+   ===================== */
 form {
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: auto;
   gap: var(--content-gap);
 }
 
-form > select {
+/* =====================
+   Form Elements
+   ===================== */
+form > select,
+form select {
   padding: var(--padding-s);
   width: auto;
+  border: none;
+  outline: none;
+  cursor: pointer;
 }
 
 form input {
@@ -17,6 +26,9 @@ form input {
   outline: none;
 }
 
+/* =====================
+   Title Section
+   ===================== */
 form .title {
   display: flex;
   width: 100%;
@@ -24,10 +36,9 @@ form .title {
   border-bottom: 1px solid var(--background-secondary);
 }
 
-/* form .title input {
-  border-radius: 0;
-} */
-
+/* =====================
+   Textarea Styles
+   ===================== */
 form textarea {
   border: 1px solid var(--background-secondary);
   width: 100%;
@@ -38,20 +49,14 @@ form textarea {
 
 form textarea:read-only {
   border: none;
-  width: 100%;
-  outline: none;
   padding: 0 !important;
   font-family: Arial, Helvetica, sans-serif;
   font-size: var(--font-m);
 }
 
-form select {
-  border: none;
-  outline: none;
-  padding: var(--padding-xs);
-  cursor: pointer;
-}
-
+/* =====================
+   Button Styles
+   ===================== */
 form button {
   align-self: flex-end;
 }

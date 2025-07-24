@@ -1,10 +1,11 @@
 import Link from "next/link";
-import { fetchDocuments, userName } from "@/lib/data";
+import { fetchDocuments, fetchPinnedDocuments, userName } from "@/lib/data";
 import { Icons as Icon } from "@/components/icon";
 
 export default async function Home() {
   const articles = await fetchDocuments();
   const user = await userName();
+  const pinned = await fetchPinnedDocuments();
 
   return (
     <div className="container col gap">
@@ -15,6 +16,19 @@ export default async function Home() {
           </Link>
         </button>
       )}
+      {pinned.map(item => (
+        <div key={item.no}>
+          <Link href={{ pathname: `${item.path}/${item.no}`, query: item}} as={`${item.path}/${item.no}`}>
+            <div className="content col list">
+              <div className="col">
+                <h2>{item.title}</h2>
+                <p>{item.date}</p>
+              </div>
+              {<p>{item.content.length > 100 ? item.content.slice(0, 100) + '...' : item.content}</p>}
+            </div>
+          </Link>
+        </div>
+      ))}
       {articles.map(item => (
         <div key={item.no}>
           <Link href={{ pathname: `${item.path}/${item.no}`, query: item}} as={`${item.path}/${item.no}`}>

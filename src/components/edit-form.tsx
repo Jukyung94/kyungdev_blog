@@ -8,7 +8,7 @@ import { DocumentType, msgState } from '@/lib/definitions';
 
 export default function EditForm(props: { doc: DocumentType }) {
   const initialState: msgState = { code: "", message: ""};
-  const { path, title, date, no, content } = props.doc;
+  const { path, title, date, no, content, pinned } = props.doc;
   const [state, formAction, isPending] = useActionState(editDocument, initialState);
 
 
@@ -25,6 +25,7 @@ export default function EditForm(props: { doc: DocumentType }) {
               <input type="text" name="title" id="title" placeholder="Title" defaultValue={title} />
               <input type="text" name="date" hidden defaultValue={date} />
               <input type="number" name="id" hidden defaultValue={no} />
+              <input type="checkbox" name="pinned" hidden defaultChecked={pinned}></input>
             </div>
             <div className="content">
               <textarea name="content" id="content" placeholder="Content..." defaultValue={content} />
