@@ -40,7 +40,7 @@ export function Actions(props: {type: string,  id : string}) {
           console.log(res.message);
           redirect(path)
         }
-        // console.log(user);
+        console.log(user);
         return;
       }}>
         <Icon name='pinned' />

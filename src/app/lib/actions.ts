@@ -173,6 +173,7 @@ export async function pinDocumentById(id: string) {
       message: "document pinned/unpinned successfully"
     } as msgState
   } catch (error) {
+    console.log(error);
     return {
       code: "fail",
       message: "fail to pin/unpin the document"
