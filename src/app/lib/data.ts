@@ -28,7 +28,7 @@ export async function fetchDocuments() {
 export async function fetchDevDocuments() {
   const data = await getDocs(query(documents, where("path", "==", "/dev"), orderBy("no", "desc")));
   const documentsArr = data.docs.map(item => {
-    return item.data();
+    return item.data() as DocumentType;
   });
 
   return documentsArr;
@@ -37,7 +37,7 @@ export async function fetchDevDocuments() {
 export async function fetchLogDocuments() {
   const data = await getDocs(query(documents, where("path", "==", "/logs"), orderBy("no", "desc")));
   const documentsArr = data.docs.map(item => {
-    return item.data();
+    return item.data() as DocumentType;
   });
 
   return documentsArr;
