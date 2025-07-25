@@ -210,7 +210,7 @@ button.inactive{
 
 
 input {
-  border: 1px solid var(--background-secondary) !important;
+  border: 1px solid var(--background-secondary);
   border-radius: 0.5rem;
   padding: var(--padding-s)
 }

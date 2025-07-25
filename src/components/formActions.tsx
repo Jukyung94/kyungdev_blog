@@ -35,6 +35,9 @@ export function Actions(props: {type: string,  id : string}) {
     return(
       <button onClick={async (e) => {
         e.preventDefault();
+        if(!user) {
+          return;
+        }
         const res = await pinDocumentById(id);
         if(res.code === "success") {
           console.log(res.message);
@@ -50,6 +53,9 @@ export function Actions(props: {type: string,  id : string}) {
     return(
       <button onClick={async (e) => {
         e.preventDefault();
+        if(!user) {
+          return;
+        }
         const res = await pinDocumentById(id);
         if(res.code === "success") {
           console.log(res.message);

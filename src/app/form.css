@@ -58,6 +58,6 @@ form textarea:read-only {
    Button Styles
    ===================== */
 form button {
-  align-self: flex-end;
+  /* align-self: flex-end; */
 }
 

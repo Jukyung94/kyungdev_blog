@@ -29,7 +29,7 @@ form {
   gap: var(--padding-m);
 }
 
-input[id="login"] {
+form[id="login"] input {
   border: 1px solid var(--background-secondary) !important;
   border-radius: 0.5rem;
   padding: var(--padding-s)
