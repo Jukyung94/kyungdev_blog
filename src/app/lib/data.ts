@@ -10,7 +10,7 @@ const documents = collection(db, "documents");
 export async function fetchPinnedDocuments() {
   const data = await getDocs(query(documents, where("pinned", "==", true)));
   const documentsArr = data.docs.map(item => {
-    return item.data();
+    return item.data() as DocumentType;
   });
 
   return documentsArr;
@@ -19,7 +19,7 @@ export async function fetchPinnedDocuments() {
 export async function fetchDocuments() {
   const data = await getDocs(query(documents, orderBy("no", "desc")));
   const documentsArr = data.docs.map(item => {
-    return item.data();
+    return item.data() as DocumentType;
   });
 
   return documentsArr;
