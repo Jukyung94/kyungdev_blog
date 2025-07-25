@@ -21,7 +21,10 @@ export default async function Home() {
           <Link href={{ pathname: `${item.path}/${item.no}`, query: item}} as={`${item.path}/${item.no}`}>
             <div className="content col list">
               <div className="col">
-                <h2>{item.title}</h2>
+                <div className="row">
+                  <h2>{item.title}</h2>
+                  {item.pinned && <Icon name="pinned"  />}
+                </div>
                 <p>{item.date}</p>
               </div>
               {<p>{item.content.length > 100 ? item.content.slice(0, 100) + '...' : item.content}</p>}
@@ -34,7 +37,10 @@ export default async function Home() {
           <Link href={{ pathname: `${item.path}/${item.no}`, query: item}} as={`${item.path}/${item.no}`}>
             <div className="content col list">
               <div className="col">
-                <h2>{item.title}</h2>
+                <div className="row">
+                  <h2>{item.title}</h2>
+                  {item.pinned && <Icon name="pinned"  />}
+                </div>
                 <p>{item.date}</p>
               </div>
               {<p>{item.content.length > 100 ? item.content.slice(0, 100) + '...' : item.content}</p>}
