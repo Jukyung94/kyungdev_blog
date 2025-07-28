@@ -30,11 +30,11 @@ export default function Menus() {
       about: 'logs',
       name: 'Logs'
     },
-    {
-      href: '/editor',
-      about: 'editor',
-      name: 'Editor'
-    }
+    // {
+    //   href: '/editor',
+    //   about: 'editor',
+    //   name: 'Editor'
+    // }
   ]
 
   return(
