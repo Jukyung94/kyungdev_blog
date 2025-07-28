@@ -4,7 +4,7 @@ import React from 'react';
 import './editor.css';
 
 export default function Editor() {
-    const content = document.getElementById('editor');
+    // const content = document.getElementById('editor');
       // content?.addEventListener('keydown', (e) => { 
       //   if (e.key === 'Enter') {
       //     e.preventDefault();
@@ -44,7 +44,7 @@ export default function Editor() {
     const children = content?.children;
     console.log(content)
     console.log(children)
-    console.log(children[3].children[0].className, children[3].children[0].innerHTML)
+    // console.log(children[3].children[0].className, children[3].children[0].innerHTML)
   }
 
    function getHilighted() {
@@ -62,11 +62,11 @@ export default function Editor() {
       const endContainer = range.endContainer;
       if(rangeContainer === startContainer) {
         same = true;
-        rangeContainer = range.startContainer.parentElement;
+        if(range.startContainer.parentElement) rangeContainer = range.startContainer.parentElement;
       }
       let start = -1;
       let end = -1;
-      let offset = 0;
+      const offset = 0;
       console.log(rangeContainer, startContainer, endContainer)
       const list = rangeContainer.childNodes
       for(let i = 0; i < list.length; i++) {
@@ -84,9 +84,9 @@ export default function Editor() {
           end = offset + range.endOffset;
           break;
         }
-        if(current.nodeName === '#text') {
-          offset += current.length;
-        }
+        // if(current.nodeName === '#text') {
+        //   offset += current.length;
+        // }
       }
       console.log(start, end, offset);
       // const range = selected.getRangeAt(0);
@@ -106,12 +106,14 @@ export default function Editor() {
       // console.log(range);
       if(range.startOffset === range.endOffset) return;
       else {
-        range.setStart(selected.anchorNode, range.startOffset)
-        range.setEnd(selected.anchorNode, range.endOffset)
-        console.log(range.endContainer.parentElement)
-        const span = document.createElement('span');
-        span.classList.add(style);
-        range.surroundContents(span);
+        if(selected.anchorNode) {
+          range.setStart(selected?.anchorNode, range.startOffset)
+          range.setEnd(selected?.anchorNode, range.endOffset)
+          console.log(range.endContainer.parentElement)
+          const span = document.createElement('span');
+          span.classList.add(style);
+          range.surroundContents(span);
+        }
         // for(let i = range.startOffset; i < range.endOffset; i++) {
         //   console.log(selected.anchorNode?.textContent[i])
         // }
@@ -139,6 +141,9 @@ export default function Editor() {
             <span>bold</span>
           </button>
           <button onClick={() => handleStyle('italic')}>
+            <span>italic</span>
+          </button>
+          <button onClick={getHilighted}>
             <span>italic</span>
           </button>
         </div>
