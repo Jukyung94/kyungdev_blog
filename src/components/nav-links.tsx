@@ -29,6 +29,11 @@ export default function Menus() {
       href: '/logs',
       about: 'logs',
       name: 'Logs'
+    },
+    {
+      href: '/editor',
+      about: 'editor',
+      name: 'Editor'
     }
   ]
 
