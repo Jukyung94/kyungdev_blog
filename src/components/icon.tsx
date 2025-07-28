@@ -11,6 +11,7 @@ export function Icons({ name, width = 24, height = 24 }: IconType) {
     profile: "mdi:account-circle-outline",
     instagram: "mdi:instagram",
     github: "mdi:github",
+    linkedin: "mdi:linkedin",
     twitter: "mdi:twitter",
     email: "mdi:email",
     share: "mdi:share-variant-outline",
