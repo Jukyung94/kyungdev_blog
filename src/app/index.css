@@ -184,14 +184,16 @@ button > * {
   font-weight: bolder;
 }
 
+button[id="icon"],
 button > *[id="icon"] {
   padding: 0 !important;
-  background-color: transparent !important;
+  background-color: white !important;
 }
 
-button>*[id="icon"]:hover {
+button[id="icon"],
+button > *[id="icon"]:hover {
   padding: 0 !important;
-  background-color: var(--background-secondary);
+  background-color: var(--background-secondary) !important;
   border-radius: 0.5rem;
 }
 

@@ -98,15 +98,23 @@ export default function Editor() {
     // document.execCommand('bold');
   }
 
+
+  function execCommandTest(style: string) {
+    document.execCommand(style)
+  }
+
   function handleStyle(style: string) {
+    //check is selected
     const selected = window.getSelection();
     if(selected) {
-      console.log(selected.anchorOffset)
+      console.log(selected.anchorOffset); //check offset
       const range = selected.getRangeAt(0);
       // console.log(range);
       if(range.startOffset === range.endOffset) return;
       else {
         if(selected.anchorNode) {
+          console.log(selected.anchorNode);
+          console.log(selected)
           range.setStart(selected?.anchorNode, range.startOffset)
           range.setEnd(selected?.anchorNode, range.endOffset)
           console.log(range.endContainer.parentElement)

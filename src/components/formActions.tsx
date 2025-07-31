@@ -33,7 +33,7 @@ export function Actions(props: {type: string,  id : string}) {
    )
   } else if (type === 'pin') {
     return(
-      <button onClick={async (e) => {
+      <button id="icon" onClick={async (e) => {
         e.preventDefault();
         if(!user) {
           return;
@@ -51,7 +51,7 @@ export function Actions(props: {type: string,  id : string}) {
     )
   } else if (type === 'unpin') {
     return(
-      <button onClick={async (e) => {
+      <button id="icon" onClick={async (e) => {
         e.preventDefault();
         if(!user) {
           return;
