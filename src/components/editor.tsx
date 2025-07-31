@@ -98,11 +98,6 @@ export default function Editor() {
     // document.execCommand('bold');
   }
 
-
-  function execCommandTest(style: string) {
-    document.execCommand(style)
-  }
-
   function handleStyle(style: string) {
     //check is selected
     const selected = window.getSelection();
@@ -111,7 +106,12 @@ export default function Editor() {
       const range = selected.getRangeAt(0);
       // console.log(range);
       if(range.startOffset === range.endOffset) return;
-      else {
+      else if(range.startOffset === 0 && range.endOffset === selected.anchorOffset) {
+        //selected from start to end, add and remove styles
+        const parents = range.commonAncestorContainer.parentElement;
+        if(parents?.classList.contains(style)) parents.classList.remove(style);
+        else parents?.classList.add(style);
+      } else {
         if(selected.anchorNode) {
           console.log(selected.anchorNode);
           console.log(selected)
@@ -126,17 +126,16 @@ export default function Editor() {
         //   console.log(selected.anchorNode?.textContent[i])
         // }
       }
-      return;
-      const rangeContainer = range.commonAncestorContainer;
-      if(rangeContainer.nodeName === '#text' &&   rangeContainer.parentElement?.classList.contains('editor')) {
-        const div = document.createElement('div');
-        div.classList.add(style);
-        range.surroundContents(div);
-      } else {
-        console.log(rangeContainer.childNodes)
-        const parente = rangeContainer.parentElement;
-        parente?.classList.add(style);
-      }
+      // const rangeContainer = range.commonAncestorContainer;
+      // if(rangeContainer.nodeName === '#text' &&   rangeContainer.parentElement?.classList.contains('editor')) {
+      //   const span = document.createElement('span');
+      //   span.classList.add(style);
+      //   range.surroundContents(span);
+      // } else {
+      //   console.log(rangeContainer.childNodes)
+      //   const parente = rangeContainer.parentElement;
+      //   parente?.classList.add(style);
+      // }
 
     }
   }
