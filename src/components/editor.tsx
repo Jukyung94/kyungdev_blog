@@ -4,41 +4,6 @@ import React from 'react';
 import './editor.css';
 
 export default function Editor() {
-    // const content = document.getElementById('editor');
-      // content?.addEventListener('keydown', (e) => { 
-      //   if (e.key === 'Enter') {
-      //     e.preventDefault();
-      //     console.log(document.getSelection())
-      //     const focused = document.getSelection();
-      //     const currNode = focused?.anchorNode;
-      //       if(currNode) {
-      //         console.log(currNode.parentElement)
-      //         currNode.textContent += '\n';
-      //         const parentElement = currNode.parentElement;
-      //         const newNode = document.createElement('p');
-      //         newNode.id = "lastLine"
-      //         const a = document?.querySelector('#lastLine');
-      //         console.log("asdfs", a);
-      //         if(a) a.removeAttribute('id')
-      //         newNode.appendChild(document.createTextNode("/"))
-      //         parentElement?.append(document.createElement('br'));
-      //         parentElement?.appendChild(newNode);
-      //       }
-      //     }
-      // });
-      // content?.addEventListener('keyup',(e) => {
-      //   if(e.key === 'Enter') {
-      //     const currLine = window.getSelection()?.getRangeAt(0);
-      //     if(currLine) {
-      //       const container = currLine.commonAncestorContainer;
-      //       container.className = ''
-      //       // ragne.selectNodeContents(content);
-      //       // currLine.removeAllRanges();
-      //       // currLine.addRange(ragne);
-      //     }
-      //   }
-      // })
-
   function handleSubmit() {
     const content = document.getElementById('editor');
     const children = content?.children;
