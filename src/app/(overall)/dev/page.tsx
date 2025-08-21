@@ -5,8 +5,8 @@ export default async function Page() {
   const articles = await fetchDevDocuments();
 
   return (
-    <div className="container col gap">
+    <section className="container col gap">
       <List docs={articles} />
-    </div>
+    </section>
   );
 }
