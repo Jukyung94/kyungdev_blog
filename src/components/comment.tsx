@@ -12,7 +12,7 @@ export default function Comment(props: { id: string }) {
   const [prevComments, setPrevComments] = useState<CommentType[]>([]);
   const [isPending, startTransition] = useTransition();
   const router = usePathname();
-  const [ollama, setOllama] = useState<string>("hellllllllllllllp");
+  // const [ollama, setOllama] = useState<string>("hellllllllllllllp");
   
   useEffect(() => {
     getPrevComments();
