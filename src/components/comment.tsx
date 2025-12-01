@@ -12,7 +12,7 @@ export default function Comment(props: { id: string }) {
   const [prevComments, setPrevComments] = useState<CommentType[]>([]);
   const [isPending, startTransition] = useTransition();
   const router = usePathname();
-  // const [ollama, setOllama] = useState<string>("hellllllllllllllp");
+  const [ollama, setOllama] = useState<string>("hellllllllllllllp");
   
   useEffect(() => {
     getPrevComments();
@@ -104,7 +104,7 @@ export default function Comment(props: { id: string }) {
             >
               <span>SUBMIT</span>
             </button>
-            {/* <span>{ollama}</span>
+            <span>{ollama}</span>
             <button onClick={async() => {
               const res = await fetch('http://localhost:3000/api/chat', {
                 method: 'POST',
@@ -117,7 +117,7 @@ export default function Comment(props: { id: string }) {
               setOllama(res.statusText);
             }}>
               test
-            </button> */}
+            </button>
           </div>
         </div>
       </div>
