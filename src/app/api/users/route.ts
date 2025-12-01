@@ -11,8 +11,6 @@ async function getUsers() {
   })
 }
 
-
-
 export async function GET() {
   await getUsers()
   return new Response("", {

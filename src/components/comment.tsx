@@ -5,12 +5,14 @@ import { CommentType, msgState } from "@/lib/definitions";
 import { useEffect, useState, useTransition } from "react";
 import { Icons as Icon } from "./icon";
 import { usePathname } from "next/navigation";
+
 export default function Comment(props: { id: string }) {
   const { id } = props;
   const [comment, setComment] = useState<CommentType>({ name: "", password: "", content: "", id});
   const [prevComments, setPrevComments] = useState<CommentType[]>([]);
   const [isPending, startTransition] = useTransition();
   const router = usePathname();
+  const [ollama, setOllama] = useState<string>("hellllllllllllllp");
   
   useEffect(() => {
     getPrevComments();
@@ -102,6 +104,20 @@ export default function Comment(props: { id: string }) {
             >
               <span>SUBMIT</span>
             </button>
+            {/* <span>{ollama}</span>
+            <button onClick={async() => {
+              const res = await fetch('http://localhost:3000/api/chat', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ message: "Hello Ollama!" })
+              });
+
+              setOllama(res.statusText);
+            }}>
+              test
+            </button> */}
           </div>
         </div>
       </div>
