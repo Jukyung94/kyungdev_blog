@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   description: "Jukyung Dev Logs",
   robots: "all",
   verification: {
-    google: "TdaNJiQD7gA75p8gAXHsvkJe6cARJtxpcJYI-7B6BVM"
+    google: "H9uJkRos8F8CHKTnu7x1Gn6X4Suq42I96plA-oiuoxg"
   }
 };
 
