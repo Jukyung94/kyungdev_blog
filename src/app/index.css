@@ -172,7 +172,7 @@ footer {
 
 button {
   border: none;
-  background-color: var(--background-primary);
+  /* background-color: var(--background-primary); */
   border-radius: 0.5rem;
   cursor: pointer;
 }
@@ -187,7 +187,10 @@ button > * {
 button[id="icon"],
 button > *[id="icon"] {
   padding: 0 !important;
-  background-color: white !important;
+}
+
+button[id="pin"] {
+  background-color: var(--background);
 }
 
 button[id="icon"],

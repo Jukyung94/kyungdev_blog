@@ -95,10 +95,6 @@ export async function createDocument(state: msgState, form: FormData) {
       message: error
     } as msgState;
   };
- 
-  // if(!!id) {
-  //   console.log(path, title, content, author, date, id)
-  // };
 
   try {
     await setDoc(doc(db, "documents", id.toString()), {
@@ -107,6 +103,7 @@ export async function createDocument(state: msgState, form: FormData) {
       content,
       author,
       date,
+      pinned: false,
       no: id
     });
   } catch (error) {

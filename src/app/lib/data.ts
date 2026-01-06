@@ -5,7 +5,6 @@ import { DocumentType } from "./definitions";
 
 export const dynamic = 'force-dynamic'
 const documents = collection(db, "documents");
-// const comments = collection(db, "comments");
 
 export async function fetchPinnedDocuments() {
   const data = await getDocs(query(documents, where("pinned", "==", true)));
@@ -21,8 +20,8 @@ export async function fetchDocuments() {
   const documentsArr = data.docs.map(item => {
     return item.data() as DocumentType;
   });
-
-  return documentsArr;
+  
+  return documentsArr.filter(item => !item.pinned);
 };
 
 export async function fetchDevDocuments() {
