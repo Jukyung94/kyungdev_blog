@@ -18,8 +18,7 @@ export default function ServiceWorker() {
   }, []);
 
   async function analyticsRun() {
-    const res = await analytics
-    // console.log('Firebase Analytics supported:', res);
+    await analytics
   }
 
   async function registration() {
