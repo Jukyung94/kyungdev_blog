@@ -3,6 +3,7 @@
 import { askPermission, checkPermission, subscribeToPush } from "@/lib/notification";
 import { getCookie } from "@/lib/utils";
 import { useEffect } from "react";
+import { analytics } from "../../firebase.config";
 
 //service worker registration
 export default function ServiceWorker() {
@@ -11,7 +12,15 @@ export default function ServiceWorker() {
     if('serviceWorker' in navigator && 'PushManager' in window) {
       registration();
     }
+    if(window) {
+      analyticsRun();
+    }
   }, []);
+
+  async function analyticsRun() {
+    const res = await analytics
+    // console.log('Firebase Analytics supported:', res);
+  }
 
   async function registration() {
     const check = await checkRegistration();
@@ -33,7 +42,7 @@ export default function ServiceWorker() {
   //check is registerd
   async function checkRegistration() {
     const res = await navigator.serviceWorker.getRegistration()
-    console.log(res)
+    // console.log(res)
     return res?.active?.state
   };
 
