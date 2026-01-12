@@ -12,8 +12,9 @@ export default function Comment(props: { id: string }) {
   const [prevComments, setPrevComments] = useState<CommentType[]>([]);
   const [isPending, startTransition] = useTransition();
   const router = usePathname();
+  const user = document && document.cookie.split(";").find(c => c.trim().startsWith("user="))?.split("=")[1] || ""
   // const [ollama, setOllama] = useState<string>("hellllllllllllllp");
-  
+
   useEffect(() => {
     getPrevComments();
   }, []);
@@ -37,7 +38,7 @@ export default function Comment(props: { id: string }) {
                   <div className="title">{item.name}</div>
                   <div className="time">{item.time?.replace(",", " ")}</div>
                   <div className="row remove">
-                    <button onClick={async () => {
+                    {user === "Jukyung" && <button onClick={async () => {
                       if(confirm('Delete comment?')) {
                         if(item.cid) {
                           const res: msgState = await deleteCommentById(item.cid);
@@ -54,7 +55,7 @@ export default function Comment(props: { id: string }) {
                       }
                     }}>
                       <Icon name="remove" />
-                    </button>
+                    </button>}
                   </div>
                 </div>
                 <div>{item.content}</div>

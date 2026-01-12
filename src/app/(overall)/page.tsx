@@ -1,12 +1,11 @@
 import Link from "next/link";
-import { fetchDocuments, fetchPinnedDocuments, userName } from "@/lib/data";
+import { fetchDocuments, userName } from "@/lib/data";
 import { Icons as Icon } from "@/components/icon";
 import List from "@/components/list";
 
 export default async function Home() {
   const articles = await fetchDocuments();
   const user = await userName();
-  const pinned = await fetchPinnedDocuments();
 
   return (
     <div className="container col gap">
@@ -17,8 +16,8 @@ export default async function Home() {
           </Link>
         </button>
       )}
-      <List docs={pinned} />
-      <List docs={articles} />
+      <List docs={articles.filter(item => item.pinned)} />
+      <List docs={articles.filter(item => !item.pinned)} />
     </div>
   );
 }
